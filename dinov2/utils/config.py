@@ -30,7 +30,7 @@ def apply_scaling_rules_to_cfg(cfg):  # to fix
 
 
 def write_config(cfg, output_dir, name="config.yaml"):
-    logger.info(OmegaConf.to_yaml(cfg))
+    # logger.info(OmegaConf.to_yaml(cfg))   # [Optional] 打印配置文件内容
     saved_cfg_path = os.path.join(output_dir, name)
     with open(saved_cfg_path, "w") as f:
         OmegaConf.save(config=cfg, f=f)
@@ -56,7 +56,7 @@ def default_setup(args):
     logger = logging.getLogger("dinov2")
 
     utils.fix_random_seeds(seed + rank)
-    logger.info("git:\n  {}\n".format(utils.get_sha()))
+    # logger.info("git:\n  {}\n".format(utils.get_sha())) # NO!!!!!!
     logger.info("\n".join("%s: %s" % (k, str(v)) for k, v in sorted(dict(vars(args)).items())))
 
 

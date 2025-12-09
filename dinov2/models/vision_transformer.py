@@ -185,7 +185,7 @@ class DinoVisionTransformer(nn.Module):
             nn.init.normal_(self.register_tokens, std=1e-6)
         named_apply(init_weights_vit_timm, self)
 
-    def interpolate_pos_encoding(self, x):
+    def interpolate_pos_encoding(self, x): # !!!!!!! 插值要考虑下，我觉得channel和time可以分别插值
         """
         针对EEG序列长度变化进行1D插值。
         x: (B, seq_len, D) 包含 CLS token
@@ -359,17 +359,17 @@ def init_weights_vit_timm(module: nn.Module, name: str = ""):
             nn.init.zeros_(module.bias)
 
 
-def vit_small(num_register_tokens=0, **kwargs):
-    model = DinoVisionTransformer(
-        embed_dim=384,
-        depth=12,
-        num_heads=6,
-        mlp_ratio=4,
-        block_fn=partial(Block, attn_class=MemEffAttention),
-        num_register_tokens=num_register_tokens,
-        **kwargs,
-    )
-    return model
+# def vit_small(num_register_tokens=0, **kwargs):
+#     model = DinoVisionTransformer(
+#         embed_dim=384,
+#         depth=12,
+#         num_heads=6,
+#         mlp_ratio=4,
+#         block_fn=partial(Block, attn_class=MemEffAttention),
+#         num_register_tokens=num_register_tokens,
+#         **kwargs,
+#     )
+#     return model
 
 
 def vit_base(num_register_tokens=0, **kwargs):
@@ -385,20 +385,20 @@ def vit_base(num_register_tokens=0, **kwargs):
     return model
 
 
-def vit_large(num_register_tokens=0, **kwargs):
-    model = DinoVisionTransformer(
-        embed_dim=1024,
-        depth=24,
-        num_heads=16,
-        mlp_ratio=4,
-        block_fn=partial(Block, attn_class=MemEffAttention),
-        num_register_tokens=num_register_tokens,
-        **kwargs,
-    )
-    return model
+# def vit_large(num_register_tokens=0, **kwargs):
+#     model = DinoVisionTransformer(
+#         embed_dim=1024,
+#         depth=24,
+#         num_heads=16,
+#         mlp_ratio=4,
+#         block_fn=partial(Block, attn_class=MemEffAttention),
+#         num_register_tokens=num_register_tokens,
+#         **kwargs,
+#     )
+#     return model
 
 
-def vit_giant2(num_register_tokens=0, **kwargs):
+# def vit_giant2(num_register_tokens=0, **kwargs):
     """
     Close to ViT-giant, with embed-dim 1536 and 24 heads => embed-dim per head 64
     """

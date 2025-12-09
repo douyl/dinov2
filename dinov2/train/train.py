@@ -166,25 +166,27 @@ def do_train(cfg, model, resume=False):
     )
 
     # setup data preprocessing
-    img_size = cfg.crops.global_crops_size
-    patch_size = cfg.student.patch_size
-    n_tokens = (img_size // patch_size) ** 2
+    # img_size = cfg.crops.global_crops_size
+    # patch_size = cfg.student.patch_size
+    # n_tokens = (img_size // patch_size) ** 2
+    num_channels = cfg.crops.num_channels
+    num_patches_per_channel = cfg.crops.num_patches_per_channel
+    n_tokens = num_channels * num_patches_per_channel
     
-    # 这里的 mask_generator 是原始图片的逻辑，如果你修改了 EEG 的 Dataset
-    # 并且传入了特定的 Mask 逻辑，这里的 mask_generator 可能仅用于 collate 的接口占位
-    # 或者需要确保这里的 input_size 和你的 collate.py 里的逻辑一致
     mask_generator = MaskingGenerator(
-        input_size=(img_size // patch_size, img_size // patch_size),
-        max_num_patches=0.5 * img_size // patch_size * img_size // patch_size,
+        num_channels=num_channels,
+        num_time_patches=num_patches_per_channel,
+        max_num_patches=0.5 * num_channels * num_patches_per_channel,
     )
 
-    data_transform = DataAugmentationDINO(
-        cfg.crops.global_crops_scale,
-        cfg.crops.local_crops_scale,
-        cfg.crops.local_crops_number,
-        global_crops_size=cfg.crops.global_crops_size,
-        local_crops_size=cfg.crops.local_crops_size,
-    )
+    # 先不做transform，还没想好EEG上怎么做!!!!!!!!!!!!!!
+    # data_transform = DataAugmentationDINO(
+    #     cfg.crops.global_crops_scale,
+    #     cfg.crops.local_crops_scale,
+    #     cfg.crops.local_crops_number,
+    #     global_crops_size=cfg.crops.global_crops_size,
+    #     local_crops_size=cfg.crops.local_crops_size,
+    # )
 
     collate_fn = partial(
         collate_data_and_cast,
@@ -301,7 +303,8 @@ def main(args):
     model = SSLMetaArch(cfg).to(torch.device("cuda"))
     model.prepare_for_distributed_training()
 
-    logger.info("Model:\n{}".format(model))
+    # logger.info("Model:\n{}".format(model))   # [Optional] 打印模型结构
+
     if args.eval_only:
         iteration = (
             FSDPCheckpointer(model, save_dir=cfg.train.output_dir)

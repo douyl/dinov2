@@ -772,3 +772,3325 @@ crops:
 evaluation:
   eval_period_iterations: 1000
 
+I20251209 13:29:18 33331 dinov2 config.py:59] git:
+  sha: ecd87119e8cd63a5439b15eb8114da3d91ec941e, status: clean, branch: main
+
+I20251209 13:29:18 33331 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251209 13:29:18 33331 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 13:29:18 33331 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  teacher:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+dino:
+  loss_weight: 1.0
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+  koleo_loss_weight: 0.1
+ibot:
+  loss_weight: 1.0
+  mask_sample_probability: 0.5
+  mask_ratio_min_max:
+  - 0.1
+  - 0.5
+  separate_head: true
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+train:
+  batch_size_per_gpu: 2
+  dataset_path: ImageNet:split=TRAIN
+  output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 10
+  OFFICIAL_EPOCH_LENGTH: 1250
+  cache_dataset: true
+  centering: sinkhorn_knopp
+student:
+  arch: vit_base
+  patch_size: 14
+  drop_path_rate: 0.4
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ''
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 4
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+teacher:
+  momentum_teacher: 0.994
+  final_momentum_teacher: 1
+  warmup_teacher_temp: 0.04
+  teacher_temp: 0.07
+  warmup_teacher_temp_epochs: 60
+optim:
+  epochs: 200
+  weight_decay: 0.04
+  weight_decay_end: 0.2
+  base_lr: 0.0004
+  lr: 1.767766952966369e-05
+  warmup_epochs: 60
+  min_lr: 1.0e-06
+  clip_grad: 3.0
+  freeze_last_layer_epochs: 1
+  scaling_rule: sqrt_wrt_1024
+  patch_embed_lr_mult: 0.2
+  layerwise_decay: 1.0
+  adamw_beta1: 0.9
+  adamw_beta2: 0.999
+crops:
+  global_crops_scale:
+  - 0.32
+  - 1.0
+  local_crops_number: 8
+  local_crops_scale:
+  - 0.05
+  - 0.32
+  global_crops_size: 518
+  local_crops_size: 224
+evaluation:
+  eval_period_iterations: 1000
+
+I20251209 13:31:29 33625 dinov2 config.py:59] git:
+  sha: ecd87119e8cd63a5439b15eb8114da3d91ec941e, status: has uncommitted changes, branch: main
+
+I20251209 13:31:29 33625 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251209 13:31:29 33625 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 13:31:29 33625 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  teacher:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+dino:
+  loss_weight: 1.0
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+  koleo_loss_weight: 0.1
+ibot:
+  loss_weight: 1.0
+  mask_sample_probability: 0.5
+  mask_ratio_min_max:
+  - 0.1
+  - 0.5
+  separate_head: true
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+train:
+  batch_size_per_gpu: 2
+  dataset_path: ImageNet:split=TRAIN
+  output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 10
+  OFFICIAL_EPOCH_LENGTH: 1250
+  cache_dataset: true
+  centering: sinkhorn_knopp
+student:
+  arch: vit_base
+  patch_size: 14
+  drop_path_rate: 0.4
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ''
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 4
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+teacher:
+  momentum_teacher: 0.994
+  final_momentum_teacher: 1
+  warmup_teacher_temp: 0.04
+  teacher_temp: 0.07
+  warmup_teacher_temp_epochs: 60
+optim:
+  epochs: 200
+  weight_decay: 0.04
+  weight_decay_end: 0.2
+  base_lr: 0.0004
+  lr: 1.767766952966369e-05
+  warmup_epochs: 60
+  min_lr: 1.0e-06
+  clip_grad: 3.0
+  freeze_last_layer_epochs: 1
+  scaling_rule: sqrt_wrt_1024
+  patch_embed_lr_mult: 0.2
+  layerwise_decay: 1.0
+  adamw_beta1: 0.9
+  adamw_beta2: 0.999
+crops:
+  global_crops_scale:
+  - 0.32
+  - 1.0
+  local_crops_number: 8
+  local_crops_scale:
+  - 0.05
+  - 0.32
+  global_crops_size: 518
+  local_crops_size: 224
+evaluation:
+  eval_period_iterations: 1000
+
+I20251209 13:47:06 34323 dinov2 config.py:59] git:
+  sha: ecd87119e8cd63a5439b15eb8114da3d91ec941e, status: has uncommitted changes, branch: main
+
+I20251209 13:47:06 34323 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251209 13:47:06 34323 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 13:47:06 34323 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  teacher:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+dino:
+  loss_weight: 1.0
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+  koleo_loss_weight: 0.1
+ibot:
+  loss_weight: 1.0
+  mask_sample_probability: 0.5
+  mask_ratio_min_max:
+  - 0.1
+  - 0.5
+  separate_head: true
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+train:
+  batch_size_per_gpu: 2
+  dataset_path: ImageNet:split=TRAIN
+  output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 10
+  OFFICIAL_EPOCH_LENGTH: 1250
+  cache_dataset: true
+  centering: sinkhorn_knopp
+student:
+  arch: vit_base
+  patch_size: 16
+  drop_path_rate: 0.4
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ''
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 4
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+  num_channels: 19
+  num_patches_per_channel: 30
+  patch_time_dim: 250
+teacher:
+  momentum_teacher: 0.994
+  final_momentum_teacher: 1
+  warmup_teacher_temp: 0.04
+  teacher_temp: 0.07
+  warmup_teacher_temp_epochs: 60
+optim:
+  epochs: 200
+  weight_decay: 0.04
+  weight_decay_end: 0.2
+  base_lr: 0.0004
+  lr: 1.767766952966369e-05
+  warmup_epochs: 60
+  min_lr: 1.0e-06
+  clip_grad: 3.0
+  freeze_last_layer_epochs: 1
+  scaling_rule: sqrt_wrt_1024
+  patch_embed_lr_mult: 0.2
+  layerwise_decay: 1.0
+  adamw_beta1: 0.9
+  adamw_beta2: 0.999
+crops:
+  global_crops_scale:
+  - 0.32
+  - 1.0
+  local_crops_number: 8
+  local_crops_scale:
+  - 0.05
+  - 0.32
+  global_crops_size: 224
+  local_crops_size: 96
+evaluation:
+  eval_period_iterations: 1000
+
+I20251209 13:47:06 34323 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:47:07 34323 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251209 13:47:07 34323 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251209 13:47:07 34323 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251209 13:47:08 34323 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251209 13:47:08 34323 dinov2 ssl_meta_arch.py:417] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251209 13:47:08 34323 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251209 13:47:08 34323 dinov2 train.py:304] Model:
+SSLMetaArch(
+  (dino_loss): DINOLoss()
+  (koleo_loss): KoLeoLoss(
+    (pdist): PairwiseDistance()
+  )
+  (ibot_patch_loss): iBOTPatchLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): DropPath()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): DropPath()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+  (teacher): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+)
+I20251209 13:53:21 34988 dinov2 config.py:59] git:
+  sha: ecd87119e8cd63a5439b15eb8114da3d91ec941e, status: has uncommitted changes, branch: main
+
+I20251209 13:53:21 34988 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251209 13:53:21 34988 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 13:53:21 34988 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  teacher:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+dino:
+  loss_weight: 1.0
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+  koleo_loss_weight: 0.1
+ibot:
+  loss_weight: 1.0
+  mask_sample_probability: 0.5
+  mask_ratio_min_max:
+  - 0.1
+  - 0.5
+  separate_head: true
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+train:
+  batch_size_per_gpu: 2
+  dataset_path: ImageNet:split=TRAIN
+  output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 10
+  OFFICIAL_EPOCH_LENGTH: 1250
+  cache_dataset: true
+  centering: sinkhorn_knopp
+student:
+  arch: vit_base
+  patch_size: 16
+  drop_path_rate: 0.4
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ''
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 4
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+  num_channels: 19
+  num_patches_per_channel: 30
+  patch_time_dim: 250
+teacher:
+  momentum_teacher: 0.994
+  final_momentum_teacher: 1
+  warmup_teacher_temp: 0.04
+  teacher_temp: 0.07
+  warmup_teacher_temp_epochs: 60
+optim:
+  epochs: 200
+  weight_decay: 0.04
+  weight_decay_end: 0.2
+  base_lr: 0.0004
+  lr: 1.767766952966369e-05
+  warmup_epochs: 60
+  min_lr: 1.0e-06
+  clip_grad: 3.0
+  freeze_last_layer_epochs: 1
+  scaling_rule: sqrt_wrt_1024
+  patch_embed_lr_mult: 0.2
+  layerwise_decay: 1.0
+  adamw_beta1: 0.9
+  adamw_beta2: 0.999
+crops:
+  global_crops_scale:
+  - 0.32
+  - 1.0
+  local_crops_number: 8
+  local_crops_scale:
+  - 0.05
+  - 0.32
+  global_crops_size: 224
+  local_crops_size: 96
+evaluation:
+  eval_period_iterations: 1000
+
+I20251209 13:53:21 34988 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:53:22 34988 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251209 13:53:22 34988 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251209 13:53:22 34988 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251209 13:53:23 34988 dinov2 ssl_meta_arch.py:417] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251209 13:53:23 34988 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251209 13:53:23 34988 dinov2 train.py:304] Model:
+SSLMetaArch(
+  (dino_loss): DINOLoss()
+  (koleo_loss): KoLeoLoss(
+    (pdist): PairwiseDistance()
+  )
+  (ibot_patch_loss): iBOTPatchLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): DropPath()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): DropPath()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+  (teacher): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+)
+I20251209 13:55:00 35314 dinov2 config.py:59] git:
+  sha: ecd87119e8cd63a5439b15eb8114da3d91ec941e, status: has uncommitted changes, branch: main
+
+I20251209 13:55:00 35314 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251209 13:55:00 35314 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 13:55:00 35314 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  teacher:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+dino:
+  loss_weight: 1.0
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+  koleo_loss_weight: 0.1
+ibot:
+  loss_weight: 1.0
+  mask_sample_probability: 0.5
+  mask_ratio_min_max:
+  - 0.1
+  - 0.5
+  separate_head: true
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+train:
+  batch_size_per_gpu: 2
+  dataset_path: ImageNet:split=TRAIN
+  output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 10
+  OFFICIAL_EPOCH_LENGTH: 1250
+  cache_dataset: true
+  centering: sinkhorn_knopp
+student:
+  arch: vit_base
+  patch_size: 16
+  drop_path_rate: 0.4
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ''
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 4
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+  num_channels: 19
+  num_patches_per_channel: 30
+  patch_time_dim: 250
+teacher:
+  momentum_teacher: 0.994
+  final_momentum_teacher: 1
+  warmup_teacher_temp: 0.04
+  teacher_temp: 0.07
+  warmup_teacher_temp_epochs: 60
+optim:
+  epochs: 200
+  weight_decay: 0.04
+  weight_decay_end: 0.2
+  base_lr: 0.0004
+  lr: 1.767766952966369e-05
+  warmup_epochs: 60
+  min_lr: 1.0e-06
+  clip_grad: 3.0
+  freeze_last_layer_epochs: 1
+  scaling_rule: sqrt_wrt_1024
+  patch_embed_lr_mult: 0.2
+  layerwise_decay: 1.0
+  adamw_beta1: 0.9
+  adamw_beta2: 0.999
+crops:
+  global_crops_scale:
+  - 0.32
+  - 1.0
+  local_crops_number: 8
+  local_crops_scale:
+  - 0.05
+  - 0.32
+  global_crops_size: 224
+  local_crops_size: 96
+evaluation:
+  eval_period_iterations: 1000
+
+I20251209 13:55:00 35314 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:55:00 35314 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251209 13:55:01 35314 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251209 13:55:01 35314 dinov2 ssl_meta_arch.py:417] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251209 13:55:01 35314 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251209 13:55:01 35314 dinov2 train.py:304] Model:
+SSLMetaArch(
+  (dino_loss): DINOLoss()
+  (koleo_loss): KoLeoLoss(
+    (pdist): PairwiseDistance()
+  )
+  (ibot_patch_loss): iBOTPatchLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): DropPath()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): DropPath()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+  (teacher): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+)
+I20251209 13:56:47 35672 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251209 13:56:47 35672 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 13:56:47 35672 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  teacher:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+dino:
+  loss_weight: 1.0
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+  koleo_loss_weight: 0.1
+ibot:
+  loss_weight: 1.0
+  mask_sample_probability: 0.5
+  mask_ratio_min_max:
+  - 0.1
+  - 0.5
+  separate_head: true
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+train:
+  batch_size_per_gpu: 2
+  dataset_path: ImageNet:split=TRAIN
+  output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 10
+  OFFICIAL_EPOCH_LENGTH: 1250
+  cache_dataset: true
+  centering: sinkhorn_knopp
+student:
+  arch: vit_base
+  patch_size: 16
+  drop_path_rate: 0.4
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ''
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 4
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+  num_channels: 19
+  num_patches_per_channel: 30
+  patch_time_dim: 250
+teacher:
+  momentum_teacher: 0.994
+  final_momentum_teacher: 1
+  warmup_teacher_temp: 0.04
+  teacher_temp: 0.07
+  warmup_teacher_temp_epochs: 60
+optim:
+  epochs: 200
+  weight_decay: 0.04
+  weight_decay_end: 0.2
+  base_lr: 0.0004
+  lr: 1.767766952966369e-05
+  warmup_epochs: 60
+  min_lr: 1.0e-06
+  clip_grad: 3.0
+  freeze_last_layer_epochs: 1
+  scaling_rule: sqrt_wrt_1024
+  patch_embed_lr_mult: 0.2
+  layerwise_decay: 1.0
+  adamw_beta1: 0.9
+  adamw_beta2: 0.999
+crops:
+  global_crops_scale:
+  - 0.32
+  - 1.0
+  local_crops_number: 8
+  local_crops_scale:
+  - 0.05
+  - 0.32
+  global_crops_size: 224
+  local_crops_size: 96
+evaluation:
+  eval_period_iterations: 1000
+
+I20251209 13:56:48 35672 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:56:48 35672 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251209 13:56:49 35672 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251209 13:56:49 35672 dinov2 ssl_meta_arch.py:417] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251209 13:56:49 35672 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251209 13:56:49 35672 dinov2 train.py:304] Model:
+SSLMetaArch(
+  (dino_loss): DINOLoss()
+  (koleo_loss): KoLeoLoss(
+    (pdist): PairwiseDistance()
+  )
+  (ibot_patch_loss): iBOTPatchLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): DropPath()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): DropPath()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+  (teacher): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+)
+I20251209 13:57:06 35909 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251209 13:57:06 35909 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 13:57:06 35909 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  teacher:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+dino:
+  loss_weight: 1.0
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+  koleo_loss_weight: 0.1
+ibot:
+  loss_weight: 1.0
+  mask_sample_probability: 0.5
+  mask_ratio_min_max:
+  - 0.1
+  - 0.5
+  separate_head: true
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+train:
+  batch_size_per_gpu: 2
+  dataset_path: ImageNet:split=TRAIN
+  output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 10
+  OFFICIAL_EPOCH_LENGTH: 1250
+  cache_dataset: true
+  centering: sinkhorn_knopp
+student:
+  arch: vit_base
+  patch_size: 16
+  drop_path_rate: 0.4
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ''
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 4
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+  num_channels: 19
+  num_patches_per_channel: 30
+  patch_time_dim: 250
+teacher:
+  momentum_teacher: 0.994
+  final_momentum_teacher: 1
+  warmup_teacher_temp: 0.04
+  teacher_temp: 0.07
+  warmup_teacher_temp_epochs: 60
+optim:
+  epochs: 200
+  weight_decay: 0.04
+  weight_decay_end: 0.2
+  base_lr: 0.0004
+  lr: 1.767766952966369e-05
+  warmup_epochs: 60
+  min_lr: 1.0e-06
+  clip_grad: 3.0
+  freeze_last_layer_epochs: 1
+  scaling_rule: sqrt_wrt_1024
+  patch_embed_lr_mult: 0.2
+  layerwise_decay: 1.0
+  adamw_beta1: 0.9
+  adamw_beta2: 0.999
+crops:
+  global_crops_scale:
+  - 0.32
+  - 1.0
+  local_crops_number: 8
+  local_crops_scale:
+  - 0.05
+  - 0.32
+  global_crops_size: 224
+  local_crops_size: 96
+evaluation:
+  eval_period_iterations: 1000
+
+I20251209 13:57:06 35909 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:57:07 35909 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251209 13:57:07 35909 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251209 13:57:07 35909 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251209 13:57:08 35909 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251209 13:57:08 35909 dinov2 ssl_meta_arch.py:417] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251209 13:57:08 35909 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251209 13:57:08 35909 dinov2 train.py:304] Model:
+SSLMetaArch(
+  (dino_loss): DINOLoss()
+  (koleo_loss): KoLeoLoss(
+    (pdist): PairwiseDistance()
+  )
+  (ibot_patch_loss): iBOTPatchLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): DropPath()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): DropPath()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+  (teacher): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+)
+I20251209 13:59:08 36168 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 13:59:08 36168 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  teacher:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+dino:
+  loss_weight: 1.0
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+  koleo_loss_weight: 0.1
+ibot:
+  loss_weight: 1.0
+  mask_sample_probability: 0.5
+  mask_ratio_min_max:
+  - 0.1
+  - 0.5
+  separate_head: true
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+train:
+  batch_size_per_gpu: 2
+  dataset_path: ImageNet:split=TRAIN
+  output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 10
+  OFFICIAL_EPOCH_LENGTH: 1250
+  cache_dataset: true
+  centering: sinkhorn_knopp
+student:
+  arch: vit_base
+  patch_size: 16
+  drop_path_rate: 0.4
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ''
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 4
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+  num_channels: 19
+  num_patches_per_channel: 30
+  patch_time_dim: 250
+teacher:
+  momentum_teacher: 0.994
+  final_momentum_teacher: 1
+  warmup_teacher_temp: 0.04
+  teacher_temp: 0.07
+  warmup_teacher_temp_epochs: 60
+optim:
+  epochs: 200
+  weight_decay: 0.04
+  weight_decay_end: 0.2
+  base_lr: 0.0004
+  lr: 1.767766952966369e-05
+  warmup_epochs: 60
+  min_lr: 1.0e-06
+  clip_grad: 3.0
+  freeze_last_layer_epochs: 1
+  scaling_rule: sqrt_wrt_1024
+  patch_embed_lr_mult: 0.2
+  layerwise_decay: 1.0
+  adamw_beta1: 0.9
+  adamw_beta2: 0.999
+crops:
+  global_crops_scale:
+  - 0.32
+  - 1.0
+  local_crops_number: 8
+  local_crops_scale:
+  - 0.05
+  - 0.32
+  global_crops_size: 224
+  local_crops_size: 96
+evaluation:
+  eval_period_iterations: 1000
+
+I20251209 13:59:08 36168 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:59:09 36168 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:59:09 36168 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251209 13:59:09 36168 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251209 13:59:09 36168 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251209 13:59:09 36168 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251209 13:59:09 36168 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251209 13:59:09 36168 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251209 13:59:09 36168 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251209 13:59:10 36168 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251209 13:59:10 36168 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251209 13:59:10 36168 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:59:10 36168 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251209 13:59:10 36168 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251209 13:59:10 36168 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:59:10 36168 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251209 13:59:10 36168 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251209 13:59:10 36168 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251209 13:59:10 36168 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251209 13:59:10 36168 dinov2 ssl_meta_arch.py:417] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251209 13:59:10 36168 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251209 13:59:10 36168 dinov2 train.py:304] Model:
+SSLMetaArch(
+  (dino_loss): DINOLoss()
+  (koleo_loss): KoLeoLoss(
+    (pdist): PairwiseDistance()
+  )
+  (ibot_patch_loss): iBOTPatchLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): DropPath()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): DropPath()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+  (teacher): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+)
+I20251209 13:59:35 36461 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 13:59:35 36461 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  teacher:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+dino:
+  loss_weight: 1.0
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+  koleo_loss_weight: 0.1
+ibot:
+  loss_weight: 1.0
+  mask_sample_probability: 0.5
+  mask_ratio_min_max:
+  - 0.1
+  - 0.5
+  separate_head: true
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+train:
+  batch_size_per_gpu: 2
+  dataset_path: ImageNet:split=TRAIN
+  output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 10
+  OFFICIAL_EPOCH_LENGTH: 1250
+  cache_dataset: true
+  centering: sinkhorn_knopp
+student:
+  arch: vit_base
+  patch_size: 16
+  drop_path_rate: 0.4
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ''
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 4
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+  num_channels: 19
+  num_patches_per_channel: 30
+  patch_time_dim: 250
+teacher:
+  momentum_teacher: 0.994
+  final_momentum_teacher: 1
+  warmup_teacher_temp: 0.04
+  teacher_temp: 0.07
+  warmup_teacher_temp_epochs: 60
+optim:
+  epochs: 200
+  weight_decay: 0.04
+  weight_decay_end: 0.2
+  base_lr: 0.0004
+  lr: 1.767766952966369e-05
+  warmup_epochs: 60
+  min_lr: 1.0e-06
+  clip_grad: 3.0
+  freeze_last_layer_epochs: 1
+  scaling_rule: sqrt_wrt_1024
+  patch_embed_lr_mult: 0.2
+  layerwise_decay: 1.0
+  adamw_beta1: 0.9
+  adamw_beta2: 0.999
+crops:
+  global_crops_scale:
+  - 0.32
+  - 1.0
+  local_crops_number: 8
+  local_crops_scale:
+  - 0.05
+  - 0.32
+  global_crops_size: 224
+  local_crops_size: 96
+evaluation:
+  eval_period_iterations: 1000
+
+I20251209 13:59:35 36461 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:59:36 36461 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251209 13:59:36 36461 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251209 13:59:36 36461 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251209 13:59:37 36461 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251209 13:59:37 36461 dinov2 ssl_meta_arch.py:417] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251209 13:59:37 36461 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251209 13:59:37 36461 dinov2 train.py:304] Model:
+SSLMetaArch(
+  (dino_loss): DINOLoss()
+  (koleo_loss): KoLeoLoss(
+    (pdist): PairwiseDistance()
+  )
+  (ibot_patch_loss): iBOTPatchLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): DropPath()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): DropPath()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+  (teacher): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+)
+I20251209 14:02:07 36837 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251209 14:02:07 36837 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 14:02:07 36837 dinov2 config.py:33] MODEL:
+  WEIGHTS: ''
+compute_precision:
+  grad_scaler: true
+  teacher:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+  student:
+    backbone:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp16
+        buffer_dtype: fp32
+    dino_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+    ibot_head:
+      sharding_strategy: SHARD_GRAD_OP
+      mixed_precision:
+        param_dtype: fp16
+        reduce_dtype: fp32
+        buffer_dtype: fp32
+dino:
+  loss_weight: 1.0
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+  koleo_loss_weight: 0.1
+ibot:
+  loss_weight: 1.0
+  mask_sample_probability: 0.5
+  mask_ratio_min_max:
+  - 0.1
+  - 0.5
+  separate_head: true
+  head_n_prototypes: 65536
+  head_bottleneck_dim: 256
+  head_nlayers: 3
+  head_hidden_dim: 2048
+train:
+  batch_size_per_gpu: 2
+  dataset_path: ImageNet:split=TRAIN
+  output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+  saveckp_freq: 20
+  seed: 0
+  num_workers: 10
+  OFFICIAL_EPOCH_LENGTH: 1250
+  cache_dataset: true
+  centering: sinkhorn_knopp
+student:
+  arch: vit_base
+  patch_size: 16
+  drop_path_rate: 0.4
+  layerscale: 1.0e-05
+  drop_path_uniform: true
+  pretrained_weights: ''
+  ffn_layer: mlp
+  block_chunks: 0
+  qkv_bias: true
+  proj_bias: true
+  ffn_bias: true
+  num_register_tokens: 4
+  interpolate_antialias: false
+  interpolate_offset: 0.1
+  num_channels: 19
+  num_patches_per_channel: 30
+  patch_time_dim: 250
+teacher:
+  momentum_teacher: 0.994
+  final_momentum_teacher: 1
+  warmup_teacher_temp: 0.04
+  teacher_temp: 0.07
+  warmup_teacher_temp_epochs: 60
+optim:
+  epochs: 200
+  weight_decay: 0.04
+  weight_decay_end: 0.2
+  base_lr: 0.0004
+  lr: 1.767766952966369e-05
+  warmup_epochs: 60
+  min_lr: 1.0e-06
+  clip_grad: 3.0
+  freeze_last_layer_epochs: 1
+  scaling_rule: sqrt_wrt_1024
+  patch_embed_lr_mult: 0.2
+  layerwise_decay: 1.0
+  adamw_beta1: 0.9
+  adamw_beta2: 0.999
+crops:
+  global_crops_scale:
+  - 0.32
+  - 1.0
+  local_crops_number: 8
+  local_crops_scale:
+  - 0.05
+  - 0.32
+  global_crops_size: 224
+  local_crops_size: 96
+evaluation:
+  eval_period_iterations: 1000
+
+I20251209 14:02:07 36837 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 14:02:07 36837 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251209 14:02:08 36837 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251209 14:02:08 36837 dinov2 ssl_meta_arch.py:417] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251209 14:02:08 36837 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251209 14:02:09 36837 dinov2 train.py:304] Model:
+SSLMetaArch(
+  (dino_loss): DINOLoss()
+  (koleo_loss): KoLeoLoss(
+    (pdist): PairwiseDistance()
+  )
+  (ibot_patch_loss): iBOTPatchLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): DropPath()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): DropPath()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+  (teacher): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+)
+I20251209 14:03:15 37056 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251209 14:03:15 37056 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 14:03:15 37056 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 14:03:15 37056 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251209 14:03:16 37056 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251209 14:03:16 37056 dinov2 ssl_meta_arch.py:417] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251209 14:03:16 37056 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251209 14:03:17 37056 dinov2 train.py:304] Model:
+SSLMetaArch(
+  (dino_loss): DINOLoss()
+  (koleo_loss): KoLeoLoss(
+    (pdist): PairwiseDistance()
+  )
+  (ibot_patch_loss): iBOTPatchLoss()
+  (student): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): DropPath()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): DropPath()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+  (teacher): ModuleDict(
+    (backbone): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DinoVisionTransformer(
+        (patch_embed): PatchEmbed(
+          (proj): Linear(in_features=250, out_features=768, bias=True)
+          (norm): Identity()
+        )
+        (blocks): ModuleList(
+          (0-11): 12 x NestedTensorBlock(
+            (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (attn): MemEffAttention(
+              (qkv): Linear(in_features=768, out_features=2304, bias=True)
+              (proj): Linear(in_features=768, out_features=768, bias=True)
+              (proj_drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls1): LayerScale()
+            (drop_path1): Identity()
+            (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+            (mlp): Mlp(
+              (fc1): Linear(in_features=768, out_features=3072, bias=True)
+              (act): GELU(approximate='none')
+              (fc2): Linear(in_features=3072, out_features=768, bias=True)
+              (drop): Dropout(p=0.0, inplace=False)
+            )
+            (ls2): LayerScale()
+            (drop_path2): Identity()
+          )
+        )
+        (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+        (head): Identity()
+      )
+    )
+    (dino_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+    (ibot_head): FullyShardedDataParallel(
+      (_fsdp_wrapped_module): DINOHead(
+        (mlp): Sequential(
+          (0): Linear(in_features=768, out_features=2048, bias=True)
+          (1): GELU(approximate='none')
+          (2): Linear(in_features=2048, out_features=2048, bias=True)
+          (3): GELU(approximate='none')
+          (4): Linear(in_features=2048, out_features=256, bias=True)
+        )
+        (last_layer): Linear(in_features=256, out_features=65536, bias=False)
+      )
+    )
+  )
+)
+I20251209 14:18:29 37995 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251209 14:18:29 37995 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 14:18:29 37995 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 14:18:30 37995 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 14:18:30 37995 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251209 14:18:30 37995 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251209 14:18:30 37995 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251209 14:18:30 37995 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251209 14:18:30 37995 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251209 14:18:30 37995 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251209 14:18:30 37995 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251209 14:18:31 37995 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251209 14:18:31 37995 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251209 14:18:31 37995 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 14:18:31 37995 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251209 14:18:31 37995 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251209 14:18:31 37995 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 14:18:31 37995 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251209 14:18:31 37995 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251209 14:18:31 37995 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251209 14:18:31 37995 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251209 14:18:31 37995 dinov2 ssl_meta_arch.py:417] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251209 14:18:31 37995 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251209 14:22:54 37995 dinov2 param_groups.py:54] chunked fsdp
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] cls_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] pos_embed: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] register_tokens: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] mask_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] patch_embed.proj.weight: lr_multiplier: 0.2, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] patch_embed.proj.bias: lr_multiplier: 0.2, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.0.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.1.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.2.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.3.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.4.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.5.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.6.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.7.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.8.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.9.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.10.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] blocks.11.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] norm.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] norm.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 ssl_meta_arch.py:404] fusing param groups
+I20251209 14:22:54 37995 dinov2 param_groups.py:64] else code branch
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 ssl_meta_arch.py:404] fusing param groups
+I20251209 14:22:54 37995 dinov2 param_groups.py:64] else code branch
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:22:54 37995 dinov2 ssl_meta_arch.py:404] fusing param groups
+I20251209 14:22:54 37995 dinov2 train.py:106] Schedulers ready.
+W20251209 14:22:54 37995 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:689: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+
+I20251209 14:22:54 37995 fvcore.common.checkpoint checkpoint.py:148] No checkpoint found. Initializing model from scratch
+I20251209 14:30:14 38743 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251209 14:30:14 38743 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 14:30:14 38743 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 14:30:15 38743 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251209 14:30:15 38743 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251209 14:30:15 38743 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251209 14:30:16 38743 dinov2 ssl_meta_arch.py:417] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251209 14:30:16 38743 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251209 14:30:20 38743 dinov2 param_groups.py:54] chunked fsdp
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] cls_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] pos_embed: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] register_tokens: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] mask_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] patch_embed.proj.weight: lr_multiplier: 0.2, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] patch_embed.proj.bias: lr_multiplier: 0.2, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.0.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.1.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.2.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.3.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.4.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.5.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.6.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.7.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.8.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.9.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.10.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] blocks.11.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] norm.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] norm.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 ssl_meta_arch.py:404] fusing param groups
+I20251209 14:30:20 38743 dinov2 param_groups.py:64] else code branch
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 ssl_meta_arch.py:404] fusing param groups
+I20251209 14:30:20 38743 dinov2 param_groups.py:64] else code branch
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:30:20 38743 dinov2 ssl_meta_arch.py:404] fusing param groups
+I20251209 14:30:20 38743 dinov2 train.py:106] Schedulers ready.
+W20251209 14:30:20 38743 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:689: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+
+I20251209 14:30:20 38743 fvcore.common.checkpoint checkpoint.py:148] No checkpoint found. Initializing model from scratch
+I20251209 14:30:59 39000 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251209 14:30:59 39000 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251209 14:30:59 39000 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 14:30:59 39000 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251209 14:31:00 39000 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:417] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251209 14:31:00 39000 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251209 14:31:00 39000 dinov2 param_groups.py:54] chunked fsdp
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] cls_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] pos_embed: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] register_tokens: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] mask_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] patch_embed.proj.weight: lr_multiplier: 0.2, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] patch_embed.proj.bias: lr_multiplier: 0.2, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.0.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.1.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.2.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.3.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.4.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.5.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.6.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.7.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.8.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.9.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.10.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] blocks.11.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] norm.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] norm.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:404] fusing param groups
+I20251209 14:31:00 39000 dinov2 param_groups.py:64] else code branch
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:404] fusing param groups
+I20251209 14:31:00 39000 dinov2 param_groups.py:64] else code branch
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251209 14:31:00 39000 dinov2 ssl_meta_arch.py:404] fusing param groups
+I20251209 14:31:00 39000 dinov2 train.py:106] Schedulers ready.
+W20251209 14:31:00 39000 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:689: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+
+I20251209 14:31:00 39000 fvcore.common.checkpoint checkpoint.py:148] No checkpoint found. Initializing model from scratch
