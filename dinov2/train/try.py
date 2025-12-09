@@ -20,7 +20,7 @@ class MockConfig:
         # Masking 相关的参数
         self.mask_ratio_min_max = (0.1, 0.5)  # mask 比例范围
         self.mask_sample_probability = 0.5    # 样本被 mask 的概率
-        self.batch_size = 1
+        self.batch_size = 2
 
 def main():
     print("=== 开始测试 EEG DINOv2 Data Pipeline ===")
