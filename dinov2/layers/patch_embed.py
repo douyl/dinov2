@@ -3,86 +3,71 @@
 # This source code is licensed under the Apache License, Version 2.0
 # found in the LICENSE file in the root directory of this source tree.
 
-# References:
-#   https://github.com/facebookresearch/dino/blob/master/vision_transformer.py
-#   https://github.com/rwightman/pytorch-image-models/tree/master/timm/layers/patch_embed.py
+from typing import Callable, Optional
 
-from typing import Callable, Optional, Tuple, Union
-
-from torch import Tensor
+import torch
 import torch.nn as nn
-
-
-def make_2tuple(x):
-    if isinstance(x, tuple):
-        assert len(x) == 2
-        return x
-
-    assert isinstance(x, int)
-    return (x, x)
 
 
 class PatchEmbed(nn.Module):
     """
-    2D image to patch embedding: (B,C,H,W) -> (B,N,D)
+    EEG to patch embedding: (B, C, N, T) -> (B, C*N, D)
 
     Args:
-        img_size: Image size.
-        patch_size: Patch token size.
-        in_chans: Number of input image channels.
-        embed_dim: Number of linear projection output channels.
+        in_chans: Input dimension T (time samples per patch). Default: 250.
+        embed_dim: Embedding dimension. Default: 768.
         norm_layer: Normalization layer.
+        flatten_embedding: If True, flatten the input to (B, C*N, D).
+        num_channels: Number of EEG channels (C), used for calculating num_patches. Default: 19.
+        num_patches_per_channel: Number of patches per channel (N). Default: 30.
     """
 
     def __init__(
         self,
-        img_size: Union[int, Tuple[int, int]] = 224,
-        patch_size: Union[int, Tuple[int, int]] = 16,
-        in_chans: int = 3,
+        in_chans: int = 250,
         embed_dim: int = 768,
         norm_layer: Optional[Callable] = None,
         flatten_embedding: bool = True,
+        num_channels: int = 19,
+        num_patches_per_channel: int = 30,
     ) -> None:
         super().__init__()
 
-        image_HW = make_2tuple(img_size)
-        patch_HW = make_2tuple(patch_size)
-        patch_grid_size = (
-            image_HW[0] // patch_HW[0],
-            image_HW[1] // patch_HW[1],
-        )
-
-        self.img_size = image_HW
-        self.patch_size = patch_HW
-        self.patches_resolution = patch_grid_size
-        self.num_patches = patch_grid_size[0] * patch_grid_size[1]
-
+        # In this EEG context, in_chans corresponds to the time dimension T
         self.in_chans = in_chans
         self.embed_dim = embed_dim
-
         self.flatten_embedding = flatten_embedding
 
-        self.proj = nn.Conv2d(in_chans, embed_dim, kernel_size=patch_HW, stride=patch_HW)
+        # Calculate total number of patches (C * N) to maintain consistency with ViT logic
+        self.num_patches = num_channels * num_patches_per_channel
+
+        # Use Linear layer for projection: T -> embed_dim
+        self.proj = nn.Linear(in_chans, embed_dim)
+        
         self.norm = norm_layer(embed_dim) if norm_layer else nn.Identity()
 
-    def forward(self, x: Tensor) -> Tensor:
-        _, _, H, W = x.shape
-        patch_H, patch_W = self.patch_size
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """
+        Args:
+            x: Input tensor of shape (B, C, N, T)
+        """
+        B, C, N, T = x.shape
+        
+        # Verify input dimension T matches in_chans
+        assert T == self.in_chans, f"Input time dimension {T} does not match in_chans {self.in_chans}"
+        assert C * N == self.num_patches, f"Input patches {C*N} do not match expected num_patches {self.num_patches}"
+        
+        # Flatten Channels (C) and Patches (N) dimensions: (B, C, N, T) -> (B, C*N, T)
+        x = x.flatten(1, 2)
 
-        assert H % patch_H == 0, f"Input image height {H} is not a multiple of patch height {patch_H}"
-        assert W % patch_W == 0, f"Input image width {W} is not a multiple of patch width: {patch_W}"
+        # Project to embedding dimension: (B, C*N, T) -> (B, C*N, embed_dim)
+        x = self.proj(x)
 
-        x = self.proj(x)  # B C H W
-        H, W = x.size(2), x.size(3)
-        x = x.flatten(2).transpose(1, 2)  # B HW C
+        # Apply normalization
         x = self.norm(x)
-        if not self.flatten_embedding:
-            x = x.reshape(-1, H, W, self.embed_dim)  # B H W C
-        return x
 
-    def flops(self) -> float:
-        Ho, Wo = self.patches_resolution
-        flops = Ho * Wo * self.embed_dim * self.in_chans * (self.patch_size[0] * self.patch_size[1])
-        if self.norm is not None:
-            flops += Ho * Wo * self.embed_dim
-        return flops
+        # Reshape back to (B, C, N, embed_dim) if not flattening
+        if not self.flatten_embedding:
+            x = x.reshape(B, C, N, self.embed_dim)
+
+        return x

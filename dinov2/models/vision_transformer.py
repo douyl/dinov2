@@ -45,9 +45,10 @@ class BlockChunk(nn.ModuleList):
 class DinoVisionTransformer(nn.Module):
     def __init__(
         self,
-        img_size=224,
-        patch_size=16,
-        in_chans=3,
+        # EEG Specific Arguments
+        patch_time_dim=250,          # T: 每个patch的时间采样点数
+        num_channels=19,             # C: EEG通道数
+        num_patches_per_channel=30,  # N: 每个通道的patch数量
         embed_dim=768,
         depth=12,
         num_heads=12,
@@ -64,14 +65,12 @@ class DinoVisionTransformer(nn.Module):
         ffn_layer="mlp",
         block_chunks=1,
         num_register_tokens=0,
-        interpolate_antialias=False,
-        interpolate_offset=0.1,
     ):
         """
         Args:
-            img_size (int, tuple): input image size
-            patch_size (int, tuple): patch size
-            in_chans (int): number of input channels
+            patch_time_dim (int): Input dimension T (time samples per patch). Default: 250.
+            num_channels (int): Number of EEG channels (C). Default: 19.
+            num_patches_per_channel (int): Number of patches per channel (N). Default: 30.
             embed_dim (int): embedding dimension
             depth (int): depth of transformer
             num_heads (int): number of attention heads
@@ -89,26 +88,35 @@ class DinoVisionTransformer(nn.Module):
             ffn_layer (str): "mlp", "swiglu", "swiglufused" or "identity"
             block_chunks: (int) split block sequence into block_chunks units for FSDP wrap
             num_register_tokens: (int) number of extra cls tokens (so-called "registers")
-            interpolate_antialias: (str) flag to apply anti-aliasing when interpolating positional embeddings
-            interpolate_offset: (float) work-around offset to apply when interpolating positional embeddings
         """
         super().__init__()
         norm_layer = partial(nn.LayerNorm, eps=1e-6)
 
         self.num_features = self.embed_dim = embed_dim  # num_features for consistency with other models
-        self.num_tokens = 1
+        self.num_tokens = 1 # CLS token
         self.n_blocks = depth
         self.num_heads = num_heads
-        self.patch_size = patch_size
+        self.patch_time_dim = patch_time_dim
+        self.num_channels = num_channels
+        self.num_patches_per_channel = num_patches_per_channel
         self.num_register_tokens = num_register_tokens
-        self.interpolate_antialias = interpolate_antialias
-        self.interpolate_offset = interpolate_offset
 
-        self.patch_embed = embed_layer(img_size=img_size, patch_size=patch_size, in_chans=in_chans, embed_dim=embed_dim)
+        # 初始化 PatchEmbed (对应你修改后的类)
+        # in_chans 对应 T (patch_time_dim)
+        self.patch_embed = embed_layer(
+            in_chans=patch_time_dim, 
+            embed_dim=embed_dim, 
+            num_channels=num_channels, 
+            num_patches_per_channel=num_patches_per_channel
+        )
+        
+        # 总的 Patch 数量 (C * N)
         num_patches = self.patch_embed.num_patches
 
         self.cls_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
+        # 位置编码: [1, num_patches + cls_token, embed_dim]
         self.pos_embed = nn.Parameter(torch.zeros(1, num_patches + self.num_tokens, embed_dim))
+        
         assert num_register_tokens >= 0
         self.register_tokens = (
             nn.Parameter(torch.zeros(1, num_register_tokens, embed_dim)) if num_register_tokens else None
@@ -177,48 +185,55 @@ class DinoVisionTransformer(nn.Module):
             nn.init.normal_(self.register_tokens, std=1e-6)
         named_apply(init_weights_vit_timm, self)
 
-    def interpolate_pos_encoding(self, x, w, h):
+    def interpolate_pos_encoding(self, x):
+        """
+        针对EEG序列长度变化进行1D插值。
+        x: (B, seq_len, D) 包含 CLS token
+        """
         previous_dtype = x.dtype
+        # 当前输入的 patch 数量 (seq_len - CLS_token)
         npatch = x.shape[1] - 1
+        # 位置编码预设的 patch 数量 (C * N)
         N = self.pos_embed.shape[1] - 1
-        if npatch == N and w == h:
+        
+        if npatch == N:
             return self.pos_embed
+            
+        # 如果长度不一致，进行1D线性插值
         pos_embed = self.pos_embed.float()
         class_pos_embed = pos_embed[:, 0]
-        patch_pos_embed = pos_embed[:, 1:]
-        dim = x.shape[-1]
-        w0 = w // self.patch_size
-        h0 = h // self.patch_size
-        M = int(math.sqrt(N))  # Recover the number of patches in each dimension
-        assert N == M * M
-        kwargs = {}
-        if self.interpolate_offset:
-            # Historical kludge: add a small number to avoid floating point error in the interpolation, see https://github.com/facebookresearch/dino/issues/8
-            # Note: still needed for backward-compatibility, the underlying operators are using both output size and scale factors
-            sx = float(w0 + self.interpolate_offset) / M
-            sy = float(h0 + self.interpolate_offset) / M
-            kwargs["scale_factor"] = (sx, sy)
-        else:
-            # Simply specify an output size instead of a scale factor
-            kwargs["size"] = (w0, h0)
+        patch_pos_embed = pos_embed[:, 1:] # (1, N, D)
+        
+        # 调整维度以适应 interpolate: (Batch, Channels, Length) -> (1, D, N)
+        patch_pos_embed = patch_pos_embed.transpose(1, 2)
+        
         patch_pos_embed = nn.functional.interpolate(
-            patch_pos_embed.reshape(1, M, M, dim).permute(0, 3, 1, 2),
-            mode="bicubic",
-            antialias=self.interpolate_antialias,
-            **kwargs,
+            patch_pos_embed,
+            size=(npatch),
+            mode="linear",
+            align_corners=False,
         )
-        assert (w0, h0) == patch_pos_embed.shape[-2:]
-        patch_pos_embed = patch_pos_embed.permute(0, 2, 3, 1).view(1, -1, dim)
+        
+        # 恢复维度: (1, npatch, D)
+        patch_pos_embed = patch_pos_embed.transpose(1, 2)
+        
         return torch.cat((class_pos_embed.unsqueeze(0), patch_pos_embed), dim=1).to(previous_dtype)
 
     def prepare_tokens_with_masks(self, x, masks=None):
-        B, nc, w, h = x.shape
+        # x shape: (B, C, N, T)
+
+        # Patch Embed: (B, C, N, T) -> (B, C*N, D)
         x = self.patch_embed(x)
+        
         if masks is not None:
+            # masks shape: (B, C*N)
             x = torch.where(masks.unsqueeze(-1), self.mask_token.to(x.dtype).unsqueeze(0), x)
 
+        # 拼接 CLS token
         x = torch.cat((self.cls_token.expand(x.shape[0], -1, -1), x), dim=1)
-        x = x + self.interpolate_pos_encoding(x, w, h)
+        
+        # 添加位置编码 (包含插值逻辑)
+        x = x + self.interpolate_pos_encoding(x)
 
         if self.register_tokens is not None:
             x = torch.cat(
@@ -272,7 +287,6 @@ class DinoVisionTransformer(nn.Module):
 
     def _get_intermediate_layers_not_chunked(self, x, n=1):
         x = self.prepare_tokens_with_masks(x)
-        # If n is an int, take the n last blocks. If it's a list, take them
         output, total_block_len = [], len(self.blocks)
         blocks_to_take = range(total_block_len - n, total_block_len) if isinstance(n, int) else n
         for i, blk in enumerate(self.blocks):
@@ -285,10 +299,9 @@ class DinoVisionTransformer(nn.Module):
     def _get_intermediate_layers_chunked(self, x, n=1):
         x = self.prepare_tokens_with_masks(x)
         output, i, total_block_len = [], 0, len(self.blocks[-1])
-        # If n is an int, take the n last blocks. If it's a list, take them
         blocks_to_take = range(total_block_len - n, total_block_len) if isinstance(n, int) else n
         for block_chunk in self.blocks:
-            for blk in block_chunk[i:]:  # Passing the nn.Identity()
+            for blk in block_chunk[i:]:
                 x = blk(x)
                 if i in blocks_to_take:
                     output.append(x)
@@ -299,7 +312,7 @@ class DinoVisionTransformer(nn.Module):
     def get_intermediate_layers(
         self,
         x: torch.Tensor,
-        n: Union[int, Sequence] = 1,  # Layers or n last layers to take
+        n: Union[int, Sequence] = 1,
         reshape: bool = False,
         return_class_token: bool = False,
         norm=True,
@@ -312,12 +325,20 @@ class DinoVisionTransformer(nn.Module):
             outputs = [self.norm(out) for out in outputs]
         class_tokens = [out[:, 0] for out in outputs]
         outputs = [out[:, 1 + self.num_register_tokens :] for out in outputs]
+        
         if reshape:
-            B, _, w, h = x.shape
+            # 修改 reshape 逻辑，恢复到 (B, C, N, D)
+            # x shape: (B, C, N, T)
+            B = x.shape[0]
+            C = self.num_channels
+            N_patches = self.num_patches_per_channel
+            # 注意：如果进行了 pos_encoding 插值，这里的 N 可能会变化，需根据 outputs 的实际大小计算
+            # 但这里假设标准流程，或者动态计算 N
             outputs = [
-                out.reshape(B, w // self.patch_size, h // self.patch_size, -1).permute(0, 3, 1, 2).contiguous()
+                out.reshape(B, C, -1, out.shape[-1]).contiguous() # (B, C, N_effective, D)
                 for out in outputs
             ]
+            
         if return_class_token:
             return tuple(zip(outputs, class_tokens))
         return tuple(outputs)
@@ -338,9 +359,8 @@ def init_weights_vit_timm(module: nn.Module, name: str = ""):
             nn.init.zeros_(module.bias)
 
 
-def vit_small(patch_size=16, num_register_tokens=0, **kwargs):
+def vit_small(num_register_tokens=0, **kwargs):
     model = DinoVisionTransformer(
-        patch_size=patch_size,
         embed_dim=384,
         depth=12,
         num_heads=6,
@@ -352,9 +372,8 @@ def vit_small(patch_size=16, num_register_tokens=0, **kwargs):
     return model
 
 
-def vit_base(patch_size=16, num_register_tokens=0, **kwargs):
+def vit_base(num_register_tokens=0, **kwargs):
     model = DinoVisionTransformer(
-        patch_size=patch_size,
         embed_dim=768,
         depth=12,
         num_heads=12,
@@ -366,9 +385,8 @@ def vit_base(patch_size=16, num_register_tokens=0, **kwargs):
     return model
 
 
-def vit_large(patch_size=16, num_register_tokens=0, **kwargs):
+def vit_large(num_register_tokens=0, **kwargs):
     model = DinoVisionTransformer(
-        patch_size=patch_size,
         embed_dim=1024,
         depth=24,
         num_heads=16,
@@ -380,12 +398,11 @@ def vit_large(patch_size=16, num_register_tokens=0, **kwargs):
     return model
 
 
-def vit_giant2(patch_size=16, num_register_tokens=0, **kwargs):
+def vit_giant2(num_register_tokens=0, **kwargs):
     """
     Close to ViT-giant, with embed-dim 1536 and 24 heads => embed-dim per head 64
     """
     model = DinoVisionTransformer(
-        patch_size=patch_size,
         embed_dim=1536,
         depth=40,
         num_heads=24,
