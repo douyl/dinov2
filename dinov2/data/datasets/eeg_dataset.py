@@ -6,17 +6,17 @@ import os
 from torch.utils.data import Dataset
 
 class EEGDataset(Dataset):
-    def __init__(self, root, C=19, N=30, T=250, local_crop_channels=10):
+    def __init__(self, data_root, num_channels=19, num_patches_per_channel=30, patch_time_dim=250, local_crop_channels=10):
         super().__init__()
-        self.root = root
-        self.C = C
-        self.N = N
-        self.T = T
+        self.data_root = data_root
+        self.C = num_channels
+        self.N = num_patches_per_channel
+        self.T = patch_time_dim
         self.local_crop_channels = local_crop_channels
-        self.files = [os.path.join(root, f) for f in os.listdir(root) if f.endswith('.npy')]
+        self.files = [os.path.join(data_root, f) for f in os.listdir(data_root) if f.endswith('.npy')]
         
         if len(self.files) == 0:
-            print(f"警告: 在 {root} 没有找到 .npy 文件")
+            print(f"警告: 在 {data_root} 没有找到 .npy 文件")
 
     def __len__(self):
         return len(self.files)

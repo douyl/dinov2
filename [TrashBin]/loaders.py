@@ -1,4 +1,7 @@
-# dinov2/data/loaders.py
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+#
+# This source code is licensed under the Apache License, Version 2.0
+# found in the LICENSE file in the root directory of this source tree.
 
 import logging
 from enum import Enum
@@ -7,11 +10,12 @@ from typing import Any, Callable, List, Optional, TypeVar
 import torch
 from torch.utils.data import Sampler
 
-from .datasets.eeg_dataset import EEGDataset
+# from .datasets import ImageNet, ImageNet22k
 from .samplers import EpochSampler, InfiniteSampler, ShardedInfiniteSampler
-import dinov2.distributed as distributed
+
 
 logger = logging.getLogger("dinov2")
+
 
 class SamplerType(Enum):
     DISTRIBUTED = 0
@@ -20,32 +24,76 @@ class SamplerType(Enum):
     SHARDED_INFINITE = 3
     SHARDED_INFINITE_NEW = 4
 
+
+def _make_bool_str(b: bool) -> str:
+    return "yes" if b else "no"
+
+
+def _make_sample_transform(image_transform: Optional[Callable] = None, target_transform: Optional[Callable] = None):
+    def transform(sample):
+        image, target = sample
+        if image_transform is not None:
+            image = image_transform(image)
+        if target_transform is not None:
+            target = target_transform(target)
+        return image, target
+
+    return transform
+
+
+def _parse_dataset_str(dataset_str: str):
+    tokens = dataset_str.split(":")
+
+    name = tokens[0]
+    kwargs = {}
+
+    for token in tokens[1:]:
+        key, value = token.split("=")
+        assert key in ("root", "extra", "split")
+        kwargs[key] = value
+
+    if name == "ImageNet":
+        class_ = ImageNet
+        if "split" in kwargs:
+            kwargs["split"] = ImageNet.Split[kwargs["split"]]
+    elif name == "ImageNet22k":
+        class_ = ImageNet22k
+    else:
+        raise ValueError(f'Unsupported dataset "{name}"')
+
+    return class_, kwargs
+
+
 def make_dataset(
     *,
-    data_root: str,
-    num_channels: int = 19,
-    num_patches_per_channel: int = 30,
-    patch_time_dim: int = 250,
-    local_crop_channels: int = 10,
+    dataset_str: str,
+    transform: Optional[Callable] = None,
+    target_transform: Optional[Callable] = None,
 ):
     """
-    创建 EEGDataset。
-    参数直接从 yaml 配置中读取，不再解析字符串。
+    Creates a dataset with the specified parameters.
+
+    Args:
+        dataset_str: A dataset string description (e.g. ImageNet:split=TRAIN).
+        transform: A transform to apply to images.
+        target_transform: A transform to apply to targets.
+
+    Returns:
+        The created dataset.
     """
-    logger.info(f'Making EEG dataset from: "{data_root}"')
-    
-    # 实例化 Dataset
-    # 注意：transform 逻辑已经包含在 EEGDataset 内部 (Global/Local crops 生成)，
-    # 这里不需要额外传递 transform 函数。
-    dataset = EEGDataset(
-        data_root=data_root,
-        num_channels=num_channels,
-        num_patches_per_channel=num_patches_per_channel,
-        patch_time_dim=patch_time_dim,
-        local_crop_channels=local_crop_channels
-    )
+    logger.info(f'using dataset: "{dataset_str}"')
+
+    class_, kwargs = _parse_dataset_str(dataset_str)
+    dataset = class_(transform=transform, target_transform=target_transform, **kwargs)
 
     logger.info(f"# of dataset samples: {len(dataset):,d}")
+
+    # Aggregated datasets do not expose (yet) these attributes, so add them.
+    if not hasattr(dataset, "transform"):
+        setattr(dataset, "transform", transform)
+    if not hasattr(dataset, "target_transform"):
+        setattr(dataset, "target_transform", target_transform)
+
     return dataset
 
 
@@ -74,6 +122,7 @@ def _make_sampler(
         logger.info("sampler: sharded infinite")
         if size > 0:
             raise ValueError("sampler size > 0 is invalid")
+        # TODO: Remove support for old shuffling
         use_new_shuffle_tensor_slice = type == SamplerType.SHARDED_INFINITE_NEW
         return ShardedInfiniteSampler(
             sample_count=sample_count,
@@ -113,6 +162,7 @@ def _make_sampler(
 
 T = TypeVar("T")
 
+
 def make_data_loader(
     *,
     dataset,
@@ -128,7 +178,20 @@ def make_data_loader(
     collate_fn: Optional[Callable[[List[T]], Any]] = None,
 ):
     """
-    创建 Data Loader。
+    Creates a data loader with the specified parameters.
+
+    Args:
+        dataset: A dataset (third party, LaViDa or WebDataset).
+        batch_size: The size of batches to generate.
+        num_workers: The number of workers to use.
+        shuffle: Whether to shuffle samples.
+        seed: The random seed to use.
+        sampler_type: Which sampler to use: EPOCH, INFINITE, SHARDED_INFINITE, SHARDED_INFINITE_NEW, DISTRIBUTED or None.
+        sampler_size: The number of images per epoch (when applicable) or -1 for the entire dataset.
+        sampler_advance: How many samples to skip (when applicable).
+        drop_last: Whether the last non-full batch of data should be dropped.
+        persistent_workers: maintain the workers Dataset instances alive after a dataset has been consumed once.
+        collate_fn: Function that performs batch collation
     """
 
     sampler = _make_sampler(

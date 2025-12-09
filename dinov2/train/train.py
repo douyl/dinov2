@@ -18,7 +18,7 @@ import torch
 from dinov2.data.datasets.eeg_dataset import EEGDataset
 from dinov2.data.masking import MaskingGenerator
 from dinov2.data.collate import collate_data_and_cast
-from dinov2.data.loaders import SamplerType, make_data_loader
+from dinov2.data.loaders import SamplerType, make_dataset, make_data_loader
 
 import dinov2.distributed as distributed
 from dinov2.fsdp import FSDPCheckpointer
@@ -169,14 +169,24 @@ def do_train(cfg, model, resume=False):
     # img_size = cfg.crops.global_crops_size
     # patch_size = cfg.student.patch_size
     # n_tokens = (img_size // patch_size) ** 2
-    num_channels = cfg.crops.num_channels
-    num_patches_per_channel = cfg.crops.num_patches_per_channel
+    num_channels = cfg.dataset.num_channels
+    num_patches_per_channel = cfg.dataset.num_patches_per_channel
     n_tokens = num_channels * num_patches_per_channel
     
     mask_generator = MaskingGenerator(
         num_channels=num_channels,
         num_time_patches=num_patches_per_channel,
         max_num_patches=0.5 * num_channels * num_patches_per_channel,
+    )
+
+    # setup data loader
+    dataset = make_dataset(
+        data_root=cfg.dataset.data_root,
+        num_channels=num_channels,
+        num_patches_per_channel=num_patches_per_channel,
+        patch_time_dim=cfg.dataset.patch_time_dim,
+        # transform=None,
+        # target_transform=lambda _: (),
     )
 
     # 先不做transform，还没想好EEG上怎么做!!!!!!!!!!!!!!
@@ -197,13 +207,6 @@ def do_train(cfg, model, resume=False):
         dtype=inputs_dtype,
     )
 
-    # setup data loader
-    dataset = make_dataset(
-        dataset_str=cfg.train.dataset_path,
-        transform=data_transform,
-        target_transform=lambda _: (),
-    )
-    
     # Debug 时如果不想用多线程，可以将 num_workers 设为 0
     # sampler_type = SamplerType.INFINITE
     sampler_type = SamplerType.SHARDED_INFINITE
