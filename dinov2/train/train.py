@@ -1,19 +1,25 @@
-# Copyright (c) Meta Platforms, Inc. and affiliates.
-#
-# This source code is licensed under the Apache License, Version 2.0
-# found in the LICENSE file in the root directory of this source tree.
+# dinov2/train/train.py
+
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 
 import argparse
 import logging
 import math
-import os
+
 from functools import partial
 
 from fvcore.common.checkpoint import PeriodicCheckpointer
 import torch
 
-from dinov2.data import SamplerType, make_data_loader, make_dataset
-from dinov2.data import collate_data_and_cast, DataAugmentationDINO, MaskingGenerator
+# 修改 1: 引入你的 EEGDataset
+# 假设 eeg_dataset.py 在 dinov2/data/datasets/ 下
+from dinov2.data.datasets.eeg_dataset import EEGDataset
+from dinov2.data.masking import MaskingGenerator
+from dinov2.data.collate import collate_data_and_cast
+from dinov2.data.loaders import SamplerType, make_data_loader
+
 import dinov2.distributed as distributed
 from dinov2.fsdp import FSDPCheckpointer
 from dinov2.logging import MetricLogger
@@ -22,14 +28,12 @@ from dinov2.utils.utils import CosineScheduler
 
 from dinov2.train.ssl_meta_arch import SSLMetaArch
 
-
-torch.backends.cuda.matmul.allow_tf32 = True  # PyTorch 1.12 sets this to False by default
+torch.backends.cuda.matmul.allow_tf32 = True 
 logger = logging.getLogger("dinov2")
-
 
 def get_args_parser(add_help: bool = True):
     parser = argparse.ArgumentParser("DINOv2 training", add_help=add_help)
-    parser.add_argument("--config-file", default="", metavar="FILE", help="path to config file")
+    parser.add_argument("--config-file", default="dinov2/configs/train/vitb_eeg.yaml", metavar="FILE", help="path to config file")
     parser.add_argument(
         "--no-resume",
         action="store_true",
@@ -40,9 +44,9 @@ def get_args_parser(add_help: bool = True):
     parser.add_argument(
         "opts",
         help="""
-Modify config options at the end of the command. For Yacs configs, use
-space-separated "PATH.KEY VALUE" pairs.
-For python-based LazyConfig, use "path.key=value".
+        Modify config options at the end of the command. For Yacs configs, use
+        space-separated "PATH.KEY VALUE" pairs.
+        For python-based LazyConfig, use "path.key=value".
         """.strip(),
         default=None,
         nargs=argparse.REMAINDER,
@@ -137,7 +141,6 @@ def do_train(cfg, model, resume=False):
     fp16_scaler = model.fp16_scaler  # for mixed precision training
 
     # setup optimizer
-
     optimizer = build_optimizer(cfg, model.get_params_groups())
     (
         lr_schedule,
@@ -163,10 +166,13 @@ def do_train(cfg, model, resume=False):
     )
 
     # setup data preprocessing
-
     img_size = cfg.crops.global_crops_size
     patch_size = cfg.student.patch_size
     n_tokens = (img_size // patch_size) ** 2
+    
+    # 这里的 mask_generator 是原始图片的逻辑，如果你修改了 EEG 的 Dataset
+    # 并且传入了特定的 Mask 逻辑，这里的 mask_generator 可能仅用于 collate 的接口占位
+    # 或者需要确保这里的 input_size 和你的 collate.py 里的逻辑一致
     mask_generator = MaskingGenerator(
         input_size=(img_size // patch_size, img_size // patch_size),
         max_num_patches=0.5 * img_size // patch_size * img_size // patch_size,
@@ -190,12 +196,13 @@ def do_train(cfg, model, resume=False):
     )
 
     # setup data loader
-
     dataset = make_dataset(
         dataset_str=cfg.train.dataset_path,
         transform=data_transform,
         target_transform=lambda _: (),
     )
+    
+    # Debug 时如果不想用多线程，可以将 num_workers 设为 0
     # sampler_type = SamplerType.INFINITE
     sampler_type = SamplerType.SHARDED_INFINITE
     data_loader = make_data_loader(
@@ -203,15 +210,14 @@ def do_train(cfg, model, resume=False):
         batch_size=cfg.train.batch_size_per_gpu,
         num_workers=cfg.train.num_workers,
         shuffle=True,
-        seed=start_iter,  # TODO: Fix this -- cfg.train.seed
+        seed=start_iter,
         sampler_type=sampler_type,
-        sampler_advance=0,  # TODO(qas): fix this -- start_iter * cfg.train.batch_size_per_gpu,
+        sampler_advance=0,
         drop_last=True,
         collate_fn=collate_fn,
     )
 
     # training loop
-
     iteration = start_iter
 
     logger.info("Starting training from iteration {}".format(start_iter))
@@ -231,7 +237,6 @@ def do_train(cfg, model, resume=False):
             return
 
         # apply schedules
-
         lr = lr_schedule[iteration]
         wd = wd_schedule[iteration]
         mom = momentum_schedule[iteration]
@@ -240,12 +245,10 @@ def do_train(cfg, model, resume=False):
         apply_optim_scheduler(optimizer, lr, wd, last_layer_lr)
 
         # compute losses
-
         optimizer.zero_grad(set_to_none=True)
         loss_dict = model.forward_backward(data, teacher_temp=teacher_temp)
 
         # clip gradients
-
         if fp16_scaler is not None:
             if cfg.optim.clip_grad:
                 fp16_scaler.unscale_(optimizer)
@@ -260,11 +263,9 @@ def do_train(cfg, model, resume=False):
             optimizer.step()
 
         # perform teacher EMA update
-
         model.update_teacher(mom)
 
         # logging
-
         if distributed.get_global_size() > 1:
             for v in loss_dict.values():
                 torch.distributed.all_reduce(v)
@@ -283,7 +284,6 @@ def do_train(cfg, model, resume=False):
         metric_logger.update(total_loss=losses_reduced, **loss_dict_reduced)
 
         # checkpointing and testing
-
         if cfg.evaluation.eval_period_iterations > 0 and (iteration + 1) % cfg.evaluation.eval_period_iterations == 0:
             do_test(cfg, model, f"training_{iteration}")
             torch.cuda.synchronize()
@@ -295,6 +295,7 @@ def do_train(cfg, model, resume=False):
 
 
 def main(args):
+    # setup(args) 会自动合并 ssl_default_config.yaml 和你的 args.config_file
     cfg = setup(args)
 
     model = SSLMetaArch(cfg).to(torch.device("cuda"))
@@ -315,4 +316,9 @@ def main(args):
 
 if __name__ == "__main__":
     args = get_args_parser(add_help=True).parse_args()
+     
+    if not args.output_dir:
+        args.output_dir = "debug_output_eeg"
+        print(f"DEBUG MODE: Output dir set to {args.output_dir}")
+       
     main(args)
