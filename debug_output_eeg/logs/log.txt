@@ -11886,3 +11886,994 @@ I20251209 21:26:48 80116 dinov2 loaders.py:72] sampler: sharded infinite
 I20251209 21:26:48 80116 dinov2 loaders.py:141] using PyTorch data loader
 I20251209 21:26:48 80116 dinov2 loaders.py:156] infinite data loader
 I20251209 21:26:48 80116 dinov2 train.py:223] Starting training from iteration 0
+I20251210 11:20:47 272691 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251210 11:20:47 272691 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251210 11:20:48 272691 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251210 11:20:48 272691 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251210 11:20:49 272691 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:423] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251210 11:20:49 272691 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251210 11:20:49 272691 dinov2 param_groups.py:54] chunked fsdp
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] cls_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] pos_embed: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] register_tokens: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] mask_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] patch_embed.proj.weight: lr_multiplier: 0.2, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] patch_embed.proj.bias: lr_multiplier: 0.2, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.0.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.1.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.2.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.3.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.4.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.5.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.6.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.7.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.8.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.9.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.10.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] blocks.11.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] norm.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] norm.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:410] fusing param groups
+I20251210 11:20:49 272691 dinov2 param_groups.py:64] else code branch
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:410] fusing param groups
+I20251210 11:20:49 272691 dinov2 param_groups.py:64] else code branch
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 11:20:49 272691 dinov2 ssl_meta_arch.py:410] fusing param groups
+I20251210 11:20:49 272691 dinov2 train.py:106] Schedulers ready.
+W20251210 11:20:49 272691 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:689: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+
+I20251210 11:20:49 272691 fvcore.common.checkpoint checkpoint.py:148] No checkpoint found. Initializing model from scratch
+I20251210 11:20:49 272691 dinov2 loaders.py:34] Making EEG dataset from: "./samples"
+I20251210 11:20:49 272691 dinov2 loaders.py:45] # of dataset samples: 2
+I20251210 11:20:49 272691 dinov2 loaders.py:72] sampler: sharded infinite
+I20251210 11:20:49 272691 dinov2 loaders.py:141] using PyTorch data loader
+I20251210 11:20:49 272691 dinov2 loaders.py:156] infinite data loader
+I20251210 11:20:49 272691 dinov2 train.py:223] Starting training from iteration 0
+W20251210 11:20:50 272691 py.warnings warnings.py:112] /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/dinov2/loss/koleo_loss.py:43: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+
+I20251210 11:20:50 272691 dinov2 helpers.py:102] Training  [     0/250000]  eta: 2 days, 6:03:59  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.7812 (14.7812)  dino_local_crops_loss: 10.0302 (10.0302)  dino_global_crops_loss: 1.2538 (1.2538)  koleo_loss: 0.6860 (0.6860)  ibot_loss: 2.8112 (2.8112)  time: 0.778558  data: 0.353460  max mem: 2613
+I20251210 11:20:53 272691 dinov2 helpers.py:102] Training  [    10/250000]  eta: 1 day, 0:20:59  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.7765 (14.7787)  dino_local_crops_loss: 10.0302 (10.0302)  dino_global_crops_loss: 1.2538 (1.2538)  koleo_loss: 0.6826 (0.6843)  ibot_loss: 2.8105 (2.8105)  time: 0.350652  data: 0.169331  max mem: 3632
+I20251210 11:20:55 272691 dinov2 helpers.py:102] Training  [    20/250000]  eta: 18:27:49  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.7741 (14.7785)  dino_local_crops_loss: 10.0302 (10.0302)  dino_global_crops_loss: 1.2538 (1.2538)  koleo_loss: 0.6802 (0.6839)  ibot_loss: 2.8105 (2.8106)  time: 0.240266  data: 0.075558  max mem: 3635
+I20251210 11:20:57 272691 dinov2 helpers.py:102] Training  [    30/250000]  eta: 16:28:19  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.7776 (14.7790)  dino_local_crops_loss: 10.0302 (10.0302)  dino_global_crops_loss: 1.2538 (1.2538)  koleo_loss: 0.6826 (0.6845)  ibot_loss: 2.8104 (2.8105)  time: 0.174843  data: 0.000212  max mem: 3642
+I20251210 14:15:52 318155 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251210 14:15:52 318155 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251210 14:15:52 318155 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251210 14:15:53 318155 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251210 14:15:53 318155 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251210 14:15:53 318155 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251210 14:15:54 318155 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251210 14:15:54 318155 dinov2 ssl_meta_arch.py:423] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251210 14:15:54 318155 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251210 14:15:54 318155 dinov2 param_groups.py:54] chunked fsdp
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] cls_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] pos_embed: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] register_tokens: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] mask_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] patch_embed.proj.weight: lr_multiplier: 0.2, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] patch_embed.proj.bias: lr_multiplier: 0.2, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.0.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.1.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.2.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.3.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.4.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.5.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.6.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.7.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.8.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.9.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.10.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] blocks.11.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] norm.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] norm.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 ssl_meta_arch.py:410] fusing param groups
+I20251210 14:15:54 318155 dinov2 param_groups.py:64] else code branch
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 ssl_meta_arch.py:410] fusing param groups
+I20251210 14:15:54 318155 dinov2 param_groups.py:64] else code branch
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:15:54 318155 dinov2 ssl_meta_arch.py:410] fusing param groups
+I20251210 14:15:54 318155 dinov2 train.py:106] Schedulers ready.
+W20251210 14:15:54 318155 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:689: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+
+I20251210 14:15:54 318155 fvcore.common.checkpoint checkpoint.py:148] No checkpoint found. Initializing model from scratch
+I20251210 14:15:54 318155 dinov2 loaders.py:34] Making EEG dataset from: "./samples"
+I20251210 14:20:57 319838 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251210 14:20:57 319838 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251210 14:20:57 319838 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251210 14:20:57 319838 dinov2 vision_transformer.py:131] using MLP layer as FFN
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:44] OPTIONS -- architecture : embed_dim: 768
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:59] OPTIONS -- DINO
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO -- loss_weight: 1.0
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:62] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:76] OPTIONS -- DINO -- applying KOLEO regularization
+W20251210 14:20:58 319838 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:86] OPTIONS -- IBOT
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:87] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:97] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:98] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:122] Student and Teacher are built: they are both vit_base network.
+I20251210 14:20:58 319838 dinov2 ssl_meta_arch.py:423] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251210 14:20:58 319838 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251210 14:20:59 319838 dinov2 param_groups.py:54] chunked fsdp
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] cls_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] pos_embed: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] register_tokens: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] mask_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] patch_embed.proj.weight: lr_multiplier: 0.2, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] patch_embed.proj.bias: lr_multiplier: 0.2, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.0.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.1.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.2.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.3.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.4.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.5.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.6.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.7.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.8.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.9.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.10.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] blocks.11.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] norm.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] norm.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 ssl_meta_arch.py:410] fusing param groups
+I20251210 14:20:59 319838 dinov2 param_groups.py:64] else code branch
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 ssl_meta_arch.py:410] fusing param groups
+I20251210 14:20:59 319838 dinov2 param_groups.py:64] else code branch
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 14:20:59 319838 dinov2 ssl_meta_arch.py:410] fusing param groups
+I20251210 14:20:59 319838 dinov2 train.py:106] Schedulers ready.
+W20251210 14:20:59 319838 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:689: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+
+I20251210 14:20:59 319838 fvcore.common.checkpoint checkpoint.py:148] No checkpoint found. Initializing model from scratch
+I20251210 14:20:59 319838 dinov2 loaders.py:32] Making EEG dataset from: "./samples"
+I20251210 14:20:59 319838 dinov2 loaders.py:44] # of dataset samples: 2
+I20251210 14:20:59 319838 dinov2 loaders.py:71] sampler: sharded infinite
+I20251210 14:20:59 319838 dinov2 loaders.py:140] using PyTorch data loader
+I20251210 14:20:59 319838 dinov2 loaders.py:155] infinite data loader
+I20251210 14:20:59 319838 dinov2 train.py:224] Starting training from iteration 0
+W20251210 14:27:39 319838 py.warnings warnings.py:112] /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/dinov2/loss/koleo_loss.py:43: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+
+I20251210 14:27:39 319838 dinov2 helpers.py:102] Training  [     0/250000]  eta: 1158 days, 15:25:56  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.7816 (14.7816)  dino_local_crops_loss: 10.0302 (10.0302)  dino_global_crops_loss: 1.2538 (1.2538)  koleo_loss: 0.6860 (0.6860)  ibot_loss: 2.8116 (2.8116)  time: 400.427032  data: 399.903656  max mem: 2613
+I20251210 16:10:37 555351 dinov2 config.py:60] config_file: dinov2/configs/train/vitb_eeg.yaml
+eval: 
+eval_only: False
+no_resume: False
+opts: ['train.output_dir=/media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg']
+output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
+I20251210 16:10:37 555351 dinov2 config.py:26] sqrt scaling learning rate; base: 0.0004, new: 1.767766952966369e-05
+I20251210 16:10:37 555351 dinov2 vision_transformer.py:142] using MLP layer as FFN
+I20251210 16:10:37 555351 dinov2 vision_transformer.py:142] using MLP layer as FFN
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:46] OPTIONS -- architecture : embed_dim: 768
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:61] OPTIONS -- DINO
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:63] OPTIONS -- DINO -- loss_weight: 1.0
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:64] OPTIONS -- DINO -- head_n_prototypes: 65536
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:65] OPTIONS -- DINO -- head_bottleneck_dim: 256
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:66] OPTIONS -- DINO -- head_hidden_dim: 2048
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:78] OPTIONS -- DINO -- applying KOLEO regularization
+W20251210 16:10:38 555351 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/nn/utils/weight_norm.py:134: FutureWarning: `torch.nn.utils.weight_norm` is deprecated in favor of `torch.nn.utils.parametrizations.weight_norm`.
+  WeightNorm.apply(module, name, dim)
+
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:88] OPTIONS -- IBOT
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:89] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:90] OPTIONS -- IBOT masking -- ibot_mask_ratio_tuple: [0.1, 0.5]
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:91] OPTIONS -- IBOT masking -- ibot_mask_sample_probability: 0.5
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:99] OPTIONS -- IBOT -- loss_weight: 1.0
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:100] OPTIONS -- IBOT -- head_n_prototypes: 65536
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:101] OPTIONS -- IBOT -- head_bottleneck_dim: 256
+I20251210 16:10:38 555351 dinov2 ssl_meta_arch.py:102] OPTIONS -- IBOT -- head_hidden_dim: 2048
+I20251210 16:10:39 555351 dinov2 ssl_meta_arch.py:124] Student and Teacher are built: they are both vit_base network.
+I20251210 16:10:39 555351 dinov2 ssl_meta_arch.py:422] DISTRIBUTED FSDP -- preparing model for distributed training
+W20251210 16:10:39 555351 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/_init_utils.py:440: UserWarning: FSDP is switching to use `NO_SHARD` instead of ShardingStrategy.SHARD_GRAD_OP since the world size is 1.
+  warnings.warn(
+
+I20251210 16:10:39 555351 dinov2 param_groups.py:54] chunked fsdp
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] cls_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] register_tokens: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] mask_token: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] patch_embed.proj.weight: lr_multiplier: 0.2, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] patch_embed.proj.bias: lr_multiplier: 0.2, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] channel_embed.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] time_embed.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.0.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.1.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.2.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.3.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.4.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.5.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.6.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.7.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.8.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.9.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.10.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.norm1.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.norm1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.attn.qkv.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.attn.qkv.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.attn.proj.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.attn.proj.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.ls1.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.norm2.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.norm2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.mlp.fc1.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.mlp.fc1.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.mlp.fc2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.mlp.fc2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] blocks.11.ls2.gamma: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] norm.weight: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] norm.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 ssl_meta_arch.py:409] fusing param groups
+I20251210 16:10:39 555351 dinov2 param_groups.py:64] else code branch
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 ssl_meta_arch.py:409] fusing param groups
+I20251210 16:10:39 555351 dinov2 param_groups.py:64] else code branch
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] mlp.0.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] mlp.0.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] mlp.2.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] mlp.2.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] mlp.4.weight: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] mlp.4.bias: lr_multiplier: 1.0, wd_multiplier: 0.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] last_layer.weight_g: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 param_groups.py:87] last_layer.weight_v: lr_multiplier: 1.0, wd_multiplier: 1.0
+I20251210 16:10:39 555351 dinov2 ssl_meta_arch.py:409] fusing param groups
+I20251210 16:10:39 555351 dinov2 train.py:106] Schedulers ready.
+W20251210 16:10:39 555351 py.warnings warnings.py:112] /home/douyl/miniconda3/envs/bci/lib/python3.12/site-packages/torch/distributed/fsdp/fully_sharded_data_parallel.py:689: FutureWarning: FSDP.state_dict_type() and FSDP.set_state_dict_type() are being deprecated. Please use APIs, get_state_dict() and set_state_dict(), which can support different parallelisms, FSDP1, FSDP2, DDP. API doc: https://pytorch.org/docs/stable/distributed.checkpoint.html#torch.distributed.checkpoint.state_dict.get_state_dict .Tutorial: https://pytorch.org/tutorials/recipes/distributed_checkpoint_recipe.html .
+  warnings.warn(
+
+I20251210 16:10:39 555351 fvcore.common.checkpoint checkpoint.py:148] No checkpoint found. Initializing model from scratch
+I20251210 16:10:39 555351 dinov2 loaders.py:32] Making EEG dataset from: "./samples"
+I20251210 16:10:39 555351 dinov2 loaders.py:44] # of dataset samples: 2
+I20251210 16:10:39 555351 dinov2 loaders.py:71] sampler: sharded infinite
+I20251210 16:10:39 555351 dinov2 loaders.py:140] using PyTorch data loader
+I20251210 16:10:39 555351 dinov2 loaders.py:155] infinite data loader
+I20251210 16:10:39 555351 dinov2 train.py:224] Starting training from iteration 0
+W20251210 16:20:52 555351 py.warnings warnings.py:112] /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/dinov2/loss/koleo_loss.py:43: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+
+I20251210 16:20:52 555351 dinov2 helpers.py:102] Training  [     0/250000]  eta: 1775 days, 16:50:59  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0886 (14.0886)  dino_local_crops_loss: 10.0317 (10.0317)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0058 (-0.0058)  ibot_loss: 2.8087 (2.8087)  time: 613.682617  data: 0.412383  max mem: 2587
+W20251210 16:20:57 555351 py.warnings warnings.py:112] /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/dinov2/loss/koleo_loss.py:43: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+
+I20251210 16:20:59 555351 dinov2 helpers.py:102] Training  [    10/250000]  eta: 163 days, 1:31:23  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0886 (14.0898)  dino_local_crops_loss: 10.0322 (10.0322)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0050 (-0.0038)  ibot_loss: 2.8075 (2.8075)  time: 56.356991  data: 0.037936  max mem: 3631
+I20251210 16:21:00 555351 dinov2 helpers.py:102] Training  [    20/250000]  eta: 85 days, 15:38:35  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0857 (14.0879)  dino_local_crops_loss: 10.0320 (10.0321)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0081 (-0.0057)  ibot_loss: 2.8074 (2.8075)  time: 0.399681  data: 0.000420  max mem: 3631
+I20251210 16:21:02 555351 dinov2 helpers.py:102] Training  [    30/250000]  eta: 58 days, 4:21:38  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0838 (14.0877)  dino_local_crops_loss: 10.0319 (10.0320)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0096 (-0.0059)  ibot_loss: 2.8075 (2.8076)  time: 0.174165  data: 0.000348  max mem: 3631
+I20251210 16:21:04 555351 dinov2 helpers.py:102] Training  [    40/250000]  eta: 44 days, 2:05:28  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0854 (14.0874)  dino_local_crops_loss: 10.0319 (10.0320)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0078 (-0.0062)  ibot_loss: 2.8078 (2.8076)  time: 0.156039  data: 0.000356  max mem: 3633
+I20251210 16:21:05 555351 dinov2 helpers.py:102] Training  [    50/250000]  eta: 35 days, 12:28:35  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0834 (14.0868)  dino_local_crops_loss: 10.0318 (10.0319)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0099 (-0.0067)  ibot_loss: 2.8076 (2.8076)  time: 0.138694  data: 0.000393  max mem: 3633
+I20251210 16:21:06 555351 dinov2 helpers.py:102] Training  [    60/250000]  eta: 29 days, 18:17:08  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0828 (14.0865)  dino_local_crops_loss: 10.0318 (10.0319)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0102 (-0.0069)  ibot_loss: 2.8073 (2.8075)  time: 0.139111  data: 0.000403  max mem: 3633
+I20251210 16:21:08 555351 dinov2 helpers.py:102] Training  [    70/250000]  eta: 25 days, 15:01:50  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0808 (14.0858)  dino_local_crops_loss: 10.0318 (10.0319)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0123 (-0.0075)  ibot_loss: 2.8069 (2.8074)  time: 0.139969  data: 0.000401  max mem: 3634
+I20251210 16:21:09 555351 dinov2 helpers.py:102] Training  [    80/250000]  eta: 22 days, 12:17:18  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0808 (14.0854)  dino_local_crops_loss: 10.0318 (10.0319)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0121 (-0.0079)  ibot_loss: 2.8071 (2.8074)  time: 0.140743  data: 0.000412  max mem: 3634
+I20251210 16:21:11 555351 dinov2 helpers.py:102] Training  [    90/250000]  eta: 20 days, 1:56:59  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0822 (14.0854)  dino_local_crops_loss: 10.0318 (10.0319)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0113 (-0.0078)  ibot_loss: 2.8072 (2.8073)  time: 0.139553  data: 0.000418  max mem: 3634
+I20251210 16:21:12 555351 dinov2 helpers.py:102] Training  [   100/250000]  eta: 18 days, 3:10:10  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0844 (14.0857)  dino_local_crops_loss: 10.0318 (10.0319)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0094 (-0.0075)  ibot_loss: 2.8074 (2.8074)  time: 0.138484  data: 0.000423  max mem: 3634
+I20251210 16:21:13 555351 dinov2 helpers.py:102] Training  [   110/250000]  eta: 16 days, 12:49:32  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0846 (14.0858)  dino_local_crops_loss: 10.0318 (10.0319)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0086 (-0.0074)  ibot_loss: 2.8075 (2.8074)  time: 0.139554  data: 0.000402  max mem: 3634
+I20251210 16:21:15 555351 dinov2 helpers.py:102] Training  [   120/250000]  eta: 15 days, 4:48:46  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0797 (14.0855)  dino_local_crops_loss: 10.0318 (10.0319)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0130 (-0.0077)  ibot_loss: 2.8073 (2.8074)  time: 0.139580  data: 0.000396  max mem: 3634
+I20251210 16:21:16 555351 dinov2 helpers.py:102] Training  [   130/250000]  eta: 14 days, 1:41:25  lr: 0.0000 (0.0000)  wd: 0.0400 (0.0400)  mom: 0.9940 (0.9940)  last_layer_lr: 0.0000 (0.0000)  current_batch_size: 2.0000 (2.0000)  total_loss: 14.0793 (14.0854)  dino_local_crops_loss: 10.0319 (10.0319)  dino_global_crops_loss: 1.2540 (1.2540)  koleo_loss: -0.0140 (-0.0079)  ibot_loss: 2.8073 (2.8074)  time: 0.139249  data: 0.000405  max mem: 3634

@@ -111,6 +111,8 @@ crops:
   local_crops_scale:
   - 0.05
   - 0.32
+  local_crop_size_channels: 10
+  local_crop_size_patches: 15
 evaluation:
   eval_period_iterations: 1000
 dataset:
@@ -118,4 +120,3 @@ dataset:
   num_channels: 19
   num_patches_per_channel: 30
   patch_time_dim: 250
-  local_crop_channels: 10

@@ -1,3 +1,5 @@
+# dinov2/models/vision_transformer.py
+
 # Copyright (c) Meta Platforms, Inc. and affiliates.
 #
 # This source code is licensed under the Apache License, Version 2.0
@@ -46,9 +48,9 @@ class DinoVisionTransformer(nn.Module):
     def __init__(
         self,
         # EEG Specific Arguments
-        patch_time_dim=250,          # T: 每个patch的时间采样点数
-        num_channels=19,             # C: EEG通道数
-        num_patches_per_channel=30,  # N: 每个通道的patch数量
+        patch_time_dim=250,          # T: Number of time samples per patch
+        num_channels=19,             # C: Total number of EEG channels available
+        num_patches_per_channel=30,  # N: Total number of time patches per channel
         embed_dim=768,
         depth=12,
         num_heads=12,
@@ -96,13 +98,15 @@ class DinoVisionTransformer(nn.Module):
         self.num_tokens = 1 # CLS token
         self.n_blocks = depth
         self.num_heads = num_heads
+
         self.patch_time_dim = patch_time_dim
         self.num_channels = num_channels
         self.num_patches_per_channel = num_patches_per_channel
-        self.num_register_tokens = num_register_tokens
 
-        # 初始化 PatchEmbed (对应你修改后的类)
-        # in_chans 对应 T (patch_time_dim)
+        self.num_register_tokens = num_register_tokens  # Register token
+
+        # Initialize PatchEmbed (Adapted for EEG)
+        # in_chans corresponds to T (patch_time_dim) in this adaptation
         self.patch_embed = embed_layer(
             in_chans=patch_time_dim, 
             embed_dim=embed_dim, 
@@ -110,13 +114,20 @@ class DinoVisionTransformer(nn.Module):
             num_patches_per_channel=num_patches_per_channel
         )
         
-        # 总的 Patch 数量 (C * N)
-        num_patches = self.patch_embed.num_patches
-
+        # We handle CLS token manually
         self.cls_token = nn.Parameter(torch.zeros(1, 1, embed_dim))
-        # 位置编码: [1, num_patches + cls_token, embed_dim]
-        self.pos_embed = nn.Parameter(torch.zeros(1, num_patches + self.num_tokens, embed_dim))
         
+        # --- EEG Positional Embeddings ---
+        # Instead of a single fixed pos_embed, we use factorized embeddings for Channel and Time.
+        # This allows flexible local cropping (e.g., selecting specific channels and time windows).
+        
+        # 1. Channel Embedding: Learnable vector for each of the EEG channels
+        self.channel_embed = nn.Embedding(num_channels, embed_dim)
+        
+        # 2. Time Embedding: Learnable vector for each of the time patches
+        self.time_embed = nn.Embedding(num_patches_per_channel, embed_dim)
+        
+        # Register tokens (optional extra CLS tokens)
         assert num_register_tokens >= 0
         self.register_tokens = (
             nn.Parameter(torch.zeros(1, num_register_tokens, embed_dim)) if num_register_tokens else None
@@ -179,67 +190,61 @@ class DinoVisionTransformer(nn.Module):
         self.init_weights()
 
     def init_weights(self):
-        trunc_normal_(self.pos_embed, std=0.02)
+        trunc_normal_(self.channel_embed.weight, std=0.02)
+        trunc_normal_(self.time_embed.weight, std=0.02)
         nn.init.normal_(self.cls_token, std=1e-6)
         if self.register_tokens is not None:
             nn.init.normal_(self.register_tokens, std=1e-6)
         named_apply(init_weights_vit_timm, self)
 
-    def interpolate_pos_encoding(self, x): # !!!!!!! 插值要考虑下，我觉得channel和time可以分别插值
+    def prepare_tokens_with_masks(self, x, masks=None, ch_idxs=None, time_idxs=None):
         """
-        针对EEG序列长度变化进行1D插值。
-        x: (B, seq_len, D) 包含 CLS token
+        Args:
+            x: Input tensor (B, T, C_crop, N_crop)
+            masks: Boolean mask (B, C_crop*N_crop) where True indicates masked
+            ch_idxs: Channel indices (B, C_crop)
+            time_idxs: Time indices (B, N_crop)
         """
-        previous_dtype = x.dtype
-        # 当前输入的 patch 数量 (seq_len - CLS_token)
-        npatch = x.shape[1] - 1
-        # 位置编码预设的 patch 数量 (C * N)
-        N = self.pos_embed.shape[1] - 1
         
-        if npatch == N:
-            return self.pos_embed
-            
-        # 如果长度不一致，进行1D线性插值
-        pos_embed = self.pos_embed.float()
-        class_pos_embed = pos_embed[:, 0]
-        patch_pos_embed = pos_embed[:, 1:] # (1, N, D)
+        # 1. Patch Embedding
+        # (B, T, C, N) -> (B, C*N, D), where L = C*N
+        x = self.patch_embed(x) 
         
-        # 调整维度以适应 interpolate: (Batch, Channels, Length) -> (1, D, N)
-        patch_pos_embed = patch_pos_embed.transpose(1, 2)
-        
-        patch_pos_embed = nn.functional.interpolate(
-            patch_pos_embed,
-            size=(npatch),
-            mode="linear",
-            align_corners=False,
-        )
-        
-        # 恢复维度: (1, npatch, D)
-        patch_pos_embed = patch_pos_embed.transpose(1, 2)
-        
-        return torch.cat((class_pos_embed.unsqueeze(0), patch_pos_embed), dim=1).to(previous_dtype)
-
-    def prepare_tokens_with_masks(self, x, masks=None):
-        # x shape: (B, T, C, N)
-
-        # Patch Embed: (B, T, C, N) -> (B, C*N, D)
-        x = self.patch_embed(x)
-        
+        # 2. Masking
         if masks is not None:
-            # masks shape: (B, C*N)
-            x = torch.where(masks.unsqueeze(-1), self.mask_token.to(x.dtype).unsqueeze(0), x)
-
-        # 拼接 CLS token
-        x = torch.cat((self.cls_token.expand(x.shape[0], -1, -1), x), dim=1)
+            # masks shape: (B, L)
+            # Broadcast mask_token to (B, L, D) and match dtype
+            x = torch.where(masks.unsqueeze(-1), self.mask_token.to(x.dtype), x)
         
-        # 添加位置编码 (包含插值逻辑)
-        x = x + self.interpolate_pos_encoding(x)
-
+        # 3. Add Positional Embeddings
+        if ch_idxs is not None and time_idxs is not None:
+            # (B, C_crop) -> (B, C_crop, D)
+            ch_emb = self.channel_embed(ch_idxs)
+            # (B, N_crop) -> (B, N_crop, D)
+            t_emb = self.time_embed(time_idxs)
+            
+            # Combine: (B, C_crop, 1, D) + (B, 1, N_crop, D) -> (B, C_crop, N_crop, D)
+            pos_embed_grid = ch_emb.unsqueeze(2) + t_emb.unsqueeze(1)
+            
+            # Flatten to match 'x' sequence order. 
+            pos_embed = pos_embed_grid.flatten(1, 2)
+            
+            # Add pos_embed to x (which contains both visible patches and mask tokens)
+            x = x + pos_embed
+        else:
+            raise ValueError("ch_idxs and time_idxs must be provided for positional embedding.")
+        
+        # 4. Append CLS Token
+        B = x.shape[0]
+        cls_token = self.cls_token.expand(B, -1, -1)
+        x = torch.cat((cls_token, x), dim=1)
+        
+        # 5. Append Register Tokens
         if self.register_tokens is not None:
             x = torch.cat(
                 (
                     x[:, :1],
-                    self.register_tokens.expand(x.shape[0], -1, -1),
+                    self.register_tokens.expand(B, -1, -1),
                     x[:, 1:],
                 ),
                 dim=1,
@@ -247,8 +252,13 @@ class DinoVisionTransformer(nn.Module):
 
         return x
 
-    def forward_features_list(self, x_list, masks_list):
-        x = [self.prepare_tokens_with_masks(x, masks) for x, masks in zip(x_list, masks_list)]
+    def forward_features_list(self, x_list, masks_list, ch_idxs_list, time_idxs_list):
+        # Process a list of inputs (e.g., global crops and local crops passed as a list)
+        x = [
+            self.prepare_tokens_with_masks(x, masks, ch_idxs, time_idxs) 
+            for x, masks, ch_idxs, time_idxs in zip(x_list, masks_list, ch_idxs_list, time_idxs_list)
+        ]
+        
         for blk in self.blocks:
             x = blk(x)
 
@@ -267,11 +277,16 @@ class DinoVisionTransformer(nn.Module):
             )
         return output
 
-    def forward_features(self, x, masks=None):
+    def forward_features(self, x, masks=None, ch_idxs=None, time_idxs=None):
         if isinstance(x, list):
-            return self.forward_features_list(x, masks)
+            # If x is a list, we expect ch_idxs and time_idxs to be lists of matching length.
+            # If they are not passed, we assume they are None (which might cause issues if pos embed is required).
+            ch_idxs_list = ch_idxs if ch_idxs is not None else [None] * len(x)
+            time_idxs_list = time_idxs if time_idxs is not None else [None] * len(x)
+            masks_list = masks if masks is not None else [None] * len(x)
+            return self.forward_features_list(x, masks_list, ch_idxs_list, time_idxs_list)
 
-        x = self.prepare_tokens_with_masks(x, masks)
+        x = self.prepare_tokens_with_masks(x, masks, ch_idxs, time_idxs)
 
         for blk in self.blocks:
             x = blk(x)
@@ -286,7 +301,16 @@ class DinoVisionTransformer(nn.Module):
         }
 
     def _get_intermediate_layers_not_chunked(self, x, n=1):
-        x = self.prepare_tokens_with_masks(x)
+        # Note: This method needs updating if used for inference with crops, 
+        # passing default full-range indices if needed.
+        # For now, we assume simple inference uses full frame.
+        # Generating default indices for full frame:
+        B = x.shape[0]
+        device = x.device
+        ch_idxs = torch.arange(self.num_channels, device=device).unsqueeze(0).expand(B, -1)
+        time_idxs = torch.arange(self.num_patches_per_channel, device=device).unsqueeze(0).expand(B, -1)
+
+        x = self.prepare_tokens_with_masks(x, ch_idxs=ch_idxs, time_idxs=time_idxs)
         output, total_block_len = [], len(self.blocks)
         blocks_to_take = range(total_block_len - n, total_block_len) if isinstance(n, int) else n
         for i, blk in enumerate(self.blocks):
@@ -297,7 +321,13 @@ class DinoVisionTransformer(nn.Module):
         return output
 
     def _get_intermediate_layers_chunked(self, x, n=1):
-        x = self.prepare_tokens_with_masks(x)
+        # Similar index generation as above
+        B = x.shape[0]
+        device = x.device
+        ch_idxs = torch.arange(self.num_channels, device=device).unsqueeze(0).expand(B, -1)
+        time_idxs = torch.arange(self.num_patches_per_channel, device=device).unsqueeze(0).expand(B, -1)
+
+        x = self.prepare_tokens_with_masks(x, ch_idxs=ch_idxs, time_idxs=time_idxs)
         output, i, total_block_len = [], 0, len(self.blocks[-1])
         blocks_to_take = range(total_block_len - n, total_block_len) if isinstance(n, int) else n
         for block_chunk in self.blocks:
@@ -327,15 +357,13 @@ class DinoVisionTransformer(nn.Module):
         outputs = [out[:, 1 + self.num_register_tokens :] for out in outputs]
         
         if reshape:
-            # 修改 reshape 逻辑，恢复到 (B, C, N, D)
-            # x shape: (B, C, N, T)
+            # Reshape back to (B, C, N, D)
             B = x.shape[0]
+            # Assumes full frame inference for reshaping logic
             C = self.num_channels
-            N_patches = self.num_patches_per_channel
-            # 注意：如果进行了 pos_encoding 插值，这里的 N 可能会变化，需根据 outputs 的实际大小计算
-            # 但这里假设标准流程，或者动态计算 N
+            # N might be inferred or fixed
             outputs = [
-                out.reshape(B, C, -1, out.shape[-1]).contiguous() # (B, C, N_effective, D)
+                out.reshape(B, C, -1, out.shape[-1]).contiguous() 
                 for out in outputs
             ]
             
@@ -359,19 +387,6 @@ def init_weights_vit_timm(module: nn.Module, name: str = ""):
             nn.init.zeros_(module.bias)
 
 
-# def vit_small(num_register_tokens=0, **kwargs):
-#     model = DinoVisionTransformer(
-#         embed_dim=384,
-#         depth=12,
-#         num_heads=6,
-#         mlp_ratio=4,
-#         block_fn=partial(Block, attn_class=MemEffAttention),
-#         num_register_tokens=num_register_tokens,
-#         **kwargs,
-#     )
-#     return model
-
-
 def vit_base(num_register_tokens=0, **kwargs):
     model = DinoVisionTransformer(
         embed_dim=768,
@@ -385,30 +400,5 @@ def vit_base(num_register_tokens=0, **kwargs):
     return model
 
 
-# def vit_large(num_register_tokens=0, **kwargs):
-#     model = DinoVisionTransformer(
-#         embed_dim=1024,
-#         depth=24,
-#         num_heads=16,
-#         mlp_ratio=4,
-#         block_fn=partial(Block, attn_class=MemEffAttention),
-#         num_register_tokens=num_register_tokens,
-#         **kwargs,
-#     )
-#     return model
-
-
-# def vit_giant2(num_register_tokens=0, **kwargs):
-    """
-    Close to ViT-giant, with embed-dim 1536 and 24 heads => embed-dim per head 64
-    """
-    model = DinoVisionTransformer(
-        embed_dim=1536,
-        depth=40,
-        num_heads=24,
-        mlp_ratio=4,
-        block_fn=partial(Block, attn_class=MemEffAttention),
-        num_register_tokens=num_register_tokens,
-        **kwargs,
-    )
-    return model
+# Other variants (small, large, giant) can be uncommented and adapted if needed
+# For now, only vit_base is active as per user context.

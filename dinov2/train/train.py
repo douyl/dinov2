@@ -199,8 +199,9 @@ def do_train(cfg, model, resume=False):
         num_channels=num_channels,
         num_patches_per_channel=num_patches_per_channel,
         patch_time_dim=cfg.dataset.patch_time_dim,
-        # transform=data_transform,
-        # target_transform=lambda _: (),
+        local_crops_number=cfg.crops.local_crops_number,
+        local_crop_size_channels=cfg.crops.local_crop_size_channels,
+        local_crop_size_patches=cfg.crops.local_crop_size_patches,
     )
 
     # sampler_type = SamplerType.INFINITE

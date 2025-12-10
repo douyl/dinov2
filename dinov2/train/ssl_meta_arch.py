@@ -1,3 +1,5 @@
+# dinov2/train/ssl_meta_arch.py
+
 # Copyright (c) Meta Platforms, Inc. and affiliates.
 #
 # This source code is licensed under the Apache License, Version 2.0
@@ -37,7 +39,7 @@ class SSLMetaArch(nn.Module):
         student_model_dict = dict()
         teacher_model_dict = dict()
 
-        # build_model_from_cfg 内部会调用你修改后的 vit_small/base/large 等函数
+        # build_model_from_cfg will call your modified vit_small/base/large functions
         student_backbone, teacher_backbone, embed_dim = build_model_from_cfg(cfg)
         student_model_dict["backbone"] = student_backbone
         teacher_model_dict["backbone"] = teacher_backbone
@@ -130,31 +132,31 @@ class SSLMetaArch(nn.Module):
         else:
             loss.backward()
 
-    # 修改参数名 images -> inputs_data，避免产生是图像数据的歧义
     def forward_backward(self, inputs_data, teacher_temp):
         n_global_crops = 2
         assert n_global_crops == 2, "Current logic requires 2 global crops"
         n_local_crops = self.cfg.crops.local_crops_number
 
-        # 从输入字典中获取数据
-        # 这里的 global_crops 预期形状是 (B * 2, C, N, T)
-        # B 是 batch size, 2 是 global crops 数量, C/N/T 对应 EEG 维度
-        # 注意：你需要确保你的 DataLoader/Collate Function 返回这些 key
-        global_crops = inputs_data["collated_global_crops"].cuda(non_blocking=True)
-        local_crops = inputs_data["collated_local_crops"].cuda(non_blocking=True)
+        # 1. Retrieve data and indices from the input dict
+        # Ensure your collate function returns these keys
+        global_crops = inputs_data["collated_global_crops"].cuda(non_blocking=True) # (B*2, T, C, N)
+        local_crops = inputs_data["collated_local_crops"].cuda(non_blocking=True)   # (B*8, T, C_local N_local)
+        
+        # New: Retrieve indices for factorized positional embedding
+        global_ch_idxs = inputs_data["global_ch_idxs"].cuda(non_blocking=True)      # (B*2, C=19)
+        global_time_idxs = inputs_data["global_time_idxs"].cuda(non_blocking=True)  # (B*2, N=30)
+        local_ch_idxs = inputs_data["local_ch_idxs"].cuda(non_blocking=True)        # (B*8, C_local)
+        local_time_idxs = inputs_data["local_time_idxs"].cuda(non_blocking=True)    # (B*8, N_local)
 
-        # Mask 相关的输入
-        # collated_masks: 预期形状 (B, C * N) 的布尔掩码或者 (B, C*N) 对应的展平索引
-        # 具体取决于你在 masking.py 和 collate.py 中的实现
-        masks = inputs_data["collated_masks"].cuda(non_blocking=True)
+        masks = inputs_data["collated_masks"].cuda(non_blocking=True)               # (B*2, C*N)
         mask_indices_list = inputs_data["mask_indices_list"].cuda(non_blocking=True)
         n_masked_patches_tensor = inputs_data["n_masked_patches"].cuda(non_blocking=True)
-        n_masked_patches = mask_indices_list.shape[0]
+        n_masked_patches = mask_indices_list.shape[0]                               # number of masked patches across the batch
         upperbound = inputs_data["upperbound"]
         masks_weight = inputs_data["masks_weight"].cuda(non_blocking=True)
 
-        n_local_crops_loss_terms = max(n_local_crops * n_global_crops, 1)
-        n_global_crops_loss_terms = (n_global_crops - 1) * n_global_crops
+        n_local_crops_loss_terms = max(n_local_crops * n_global_crops, 1)    # 8*2=16
+        n_global_crops_loss_terms = (n_global_crops - 1) * n_global_crops    # 2
 
         do_dino = self.do_dino
         do_ibot = self.do_ibot
@@ -167,18 +169,19 @@ class SSLMetaArch(nn.Module):
         def get_teacher_output():
             x, n_global_crops_teacher = global_crops, n_global_crops
             
-            # 老师网络前向传播
-            # x shape: (B*2, C, N, T) -> backbone -> dict outputs
-            teacher_backbone_output_dict = self.teacher.backbone(x, is_training=True)
+            # Pass indices to teacher backbone (only sees global crops)
+            teacher_backbone_output_dict = self.teacher.backbone(
+                x, 
+                is_training=True,
+                ch_idxs=global_ch_idxs,
+                time_idxs=global_time_idxs
+            )
             
-            # 获取 CLS Tokens
             teacher_cls_tokens = teacher_backbone_output_dict["x_norm_clstoken"]
             teacher_cls_tokens = teacher_cls_tokens.chunk(n_global_crops_teacher)
             # watch out: these are chunked and cat'd in reverse so A is matched to B in the global crops dino loss
             teacher_cls_tokens = torch.cat((teacher_cls_tokens[1], teacher_cls_tokens[0]))
             
-            # 获取 Patch Tokens 用于 iBOT Loss
-            # shape: (B*2, C*N, D) - 注意这里 C*N 已经被 flatten 了 (在 PatchEmbed 中)
             ibot_teacher_patch_tokens = teacher_backbone_output_dict["x_norm_patchtokens"]
             _dim = ibot_teacher_patch_tokens.shape[-1]
             n_cls_tokens = teacher_cls_tokens.shape[0]
@@ -186,9 +189,6 @@ class SSLMetaArch(nn.Module):
             if do_ibot and not self.ibot_separate_head:
                 buffer_tensor_teacher = ibot_teacher_patch_tokens.new_zeros(upperbound + n_cls_tokens, _dim)
                 buffer_tensor_teacher[:n_cls_tokens].copy_(teacher_cls_tokens)
-                
-                # 根据 mask_indices_list 选取被 mask 的 tokens
-                # index_select 在 dim=0 上操作，假设 mask_indices_list 是针对 flatten 后的整个 batch 的索引
                 torch.index_select(
                     ibot_teacher_patch_tokens.flatten(0, 1),
                     dim=0,
@@ -252,13 +252,16 @@ class SSLMetaArch(nn.Module):
         loss_dict = {}
 
         loss_accumulator = 0  # for backprop
-        
-        # 学生网络前向传播
-        # 注意：这里传入了 list [global_crops, local_crops]
-        # masks 也是 list [masks, None]，意味着 local crops 不进行 masking
-        # 这与你修改后的 vision_transformer.py 中的 forward_features_list 兼容
+
+        # Student Forward Pass
+        # We pass a list of inputs: [global, local]
+        # We must also pass a corresponding list of indices for positional embeddings
         student_global_backbone_output_dict, student_local_backbone_output_dict = self.student.backbone(
-            [global_crops, local_crops], masks=[masks, None], is_training=True
+            [global_crops, local_crops],
+            masks=[masks, None],
+            ch_idxs=[global_ch_idxs, local_ch_idxs],
+            time_idxs=[global_time_idxs, local_time_idxs],
+            is_training=True
         )
 
         inputs_for_student_head_list = []
@@ -271,12 +274,11 @@ class SSLMetaArch(nn.Module):
         student_global_cls_tokens = student_global_backbone_output_dict["x_norm_clstoken"]
         inputs_for_student_head_list.append(student_global_cls_tokens.unsqueeze(0))
 
-        # 1c: global crops patch tokens (用于 iBOT)
+        # 1c: global crops patch tokens (for iBOT)
         if do_ibot:
             _dim = student_global_backbone_output_dict["x_norm_clstoken"].shape[-1]
             ibot_student_patch_tokens = student_global_backbone_output_dict["x_norm_patchtokens"]
             buffer_tensor_patch_tokens = ibot_student_patch_tokens.new_zeros(upperbound, _dim)
-            # 同样使用 index_select 来提取 masked patch
             buffer_tensor_patch_tokens[:n_masked_patches].copy_(
                 torch.index_select(ibot_student_patch_tokens.flatten(0, 1), dim=0, index=mask_indices_list)
             )
@@ -287,7 +289,7 @@ class SSLMetaArch(nn.Module):
                     :n_masked_patches
                 ]
 
-        # 2: run head (MLP)
+        # 2: run head
         _attn_bias, cat_inputs = fmha.BlockDiagonalMask.from_tensor_list(inputs_for_student_head_list)
         outputs_list = _attn_bias.split(self.student.dino_head(cat_inputs))
 
@@ -374,9 +376,6 @@ class SSLMetaArch(nn.Module):
     def fsdp_synchronize_streams(self):
         if self.need_to_synchronize_fsdp_streams:
             torch.cuda.synchronize()
-            # self.student.dino_head._streams = (
-            #     self.teacher.dino_head._streams
-            # ) = self.student.backbone._streams = self.teacher.backbone._streams
             try:
                 self.student.dino_head._streams = (
                     self.teacher.dino_head._streams
@@ -427,7 +426,7 @@ class SSLMetaArch(nn.Module):
         for k, v in self.student.items():
             self.teacher[k].load_state_dict(self.student[k].state_dict())
             student_model_cfg = self.cfg.compute_precision.student[k]
-            # 这里的 BlockChunk 必须与 models/vision_transformer.py 中的定义一致
+            # Ensure BlockChunk is consistent with models/vision_transformer.py
             self.student[k] = get_fsdp_wrapper(student_model_cfg, modules_to_wrap={BlockChunk})(self.student[k])
             teacher_model_cfg = self.cfg.compute_precision.teacher[k]
             self.teacher[k] = get_fsdp_wrapper(teacher_model_cfg, modules_to_wrap={BlockChunk})(self.teacher[k])

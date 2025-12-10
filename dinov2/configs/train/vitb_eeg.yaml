@@ -11,7 +11,7 @@ dataset:
   num_channels: 19
   num_patches_per_channel: 30
   patch_time_dim: 250  # sampling rate 250Hz -> 1s patches
-  local_crop_channels: 10
+  # local_crop_channels: 10
 student:
   arch: vit_base
   pretrained_weights: ''
@@ -30,8 +30,10 @@ optim:
   base_lr: 4.0e-04  # learning rate for a batch size of 1024
   warmup_epochs: 60
   layerwise_decay: 1.0
-# crops:
+crops:
   # global_crops_size: 518
   # local_crops_size: 224
+  local_crop_size_channels: 10
+  local_crop_size_patches: 15
 evaluation:
   eval_period_iterations: 1000

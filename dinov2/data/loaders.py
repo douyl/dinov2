@@ -25,21 +25,20 @@ def make_dataset(
     num_channels: int = 19,
     num_patches_per_channel: int = 30,
     patch_time_dim: int = 250,
-    local_crop_channels: int = 10,
+    local_crops_number: int = 8,
+    local_crop_size_channels: int = 10,
+    local_crop_size_patches: int = 15,
 ):
-    """
-    创建 EEGDataset。
-    参数直接从 yaml 配置中读取，不再解析字符串。
-    """
     logger.info(f'Making EEG dataset from: "{data_root}"')
     
-    # 实例化 Dataset
     dataset = EEGDataset(
         data_root=data_root,
         num_channels=num_channels,
         num_patches_per_channel=num_patches_per_channel,
         patch_time_dim=patch_time_dim,
-        local_crop_channels=local_crop_channels
+        local_crops_number=local_crops_number,
+        local_crop_size_channels=local_crop_size_channels,
+        local_crop_size_patches=local_crop_size_patches,
     )
 
     logger.info(f"# of dataset samples: {len(dataset):,d}")
