@@ -28,6 +28,12 @@ XFORMERS_ENABLED = os.environ.get("XFORMERS_DISABLED") is None
 try:
     if XFORMERS_ENABLED:
         from xformers.ops import fmha, scaled_index_add, index_select_cat
+        if not hasattr(fmha, "BlockDiagonalMask"):
+            try:
+                from xformers.ops.fmha.attn_bias import BlockDiagonalMask
+                setattr(fmha, "BlockDiagonalMask", BlockDiagonalMask)
+            except ImportError:
+                print("Warning: Could not import BlockDiagonalMask from xformers.ops.fmha.attn_bias")
 
         XFORMERS_AVAILABLE = True
         warnings.warn("xFormers is available (Block)")
@@ -208,9 +214,12 @@ def add_residual(x, brange, residual, residual_scale_factor, scaling_vector=None
         residual = residual.flatten(1)
         x_plus_residual = torch.index_add(x_flat, 0, brange, residual.to(dtype=x.dtype), alpha=residual_scale_factor)
     else:
-        x_plus_residual = scaled_index_add(
-            x, brange, residual.to(dtype=x.dtype), scaling=scaling_vector, alpha=residual_scale_factor
-        )
+        # x_plus_residual = scaled_index_add(
+        #     x, brange, residual.to(dtype=x.dtype), scaling=scaling_vector, alpha=residual_scale_factor
+        # )  # need libcuda.so !!!
+        scaled_residual = residual.to(dtype=x.dtype) * scaling_vector
+        x.index_add_(0, brange.long(), scaled_residual, alpha=residual_scale_factor)
+        x_plus_residual = x
     return x_plus_residual
 
 
@@ -233,7 +242,11 @@ def get_attn_bias_and_cat(x_list, branges=None):
         attn_bias_cache[all_shapes] = attn_bias
 
     if branges is not None:
-        cat_tensors = index_select_cat([x.flatten(1) for x in x_list], branges).view(1, -1, x_list[0].shape[-1])
+        # cat_tensors = index_select_cat([x.flatten(1) for x in x_list], branges).view(1, -1, x_list[0].shape[-1])  # need libcuda.so !!!
+        cat_tensors = torch.cat([
+            x[idx.long()].view(-1, x.shape[-1]) 
+            for x, idx in zip(x_list, branges)
+        ], dim=0).unsqueeze(0)
     else:
         tensors_bs1 = tuple(x.reshape([1, -1, *x.shape[2:]]) for x in x_list)
         cat_tensors = torch.cat(tensors_bs1, dim=1)

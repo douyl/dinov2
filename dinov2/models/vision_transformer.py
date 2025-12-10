@@ -220,9 +220,9 @@ class DinoVisionTransformer(nn.Module):
         return torch.cat((class_pos_embed.unsqueeze(0), patch_pos_embed), dim=1).to(previous_dtype)
 
     def prepare_tokens_with_masks(self, x, masks=None):
-        # x shape: (B, C, N, T)
+        # x shape: (B, T, C, N)
 
-        # Patch Embed: (B, C, N, T) -> (B, C*N, D)
+        # Patch Embed: (B, T, C, N) -> (B, C*N, D)
         x = self.patch_embed(x)
         
         if masks is not None:

@@ -166,27 +166,13 @@ def do_train(cfg, model, resume=False):
     )
 
     # setup data preprocessing
-    # img_size = cfg.crops.global_crops_size
-    # patch_size = cfg.student.patch_size
-    # n_tokens = (img_size // patch_size) ** 2
     num_channels = cfg.dataset.num_channels
     num_patches_per_channel = cfg.dataset.num_patches_per_channel
     n_tokens = num_channels * num_patches_per_channel
-    
     mask_generator = MaskingGenerator(
         num_channels=num_channels,
         num_time_patches=num_patches_per_channel,
         max_num_patches=0.5 * num_channels * num_patches_per_channel,
-    )
-
-    # setup data loader
-    dataset = make_dataset(
-        data_root=cfg.dataset.data_root,
-        num_channels=num_channels,
-        num_patches_per_channel=num_patches_per_channel,
-        patch_time_dim=cfg.dataset.patch_time_dim,
-        # transform=None,
-        # target_transform=lambda _: (),
     )
 
     # 先不做transform，还没想好EEG上怎么做!!!!!!!!!!!!!!
@@ -207,7 +193,16 @@ def do_train(cfg, model, resume=False):
         dtype=inputs_dtype,
     )
 
-    # Debug 时如果不想用多线程，可以将 num_workers 设为 0
+    # setup data loader
+    dataset = make_dataset(
+        data_root=cfg.dataset.data_root,
+        num_channels=num_channels,
+        num_patches_per_channel=num_patches_per_channel,
+        patch_time_dim=cfg.dataset.patch_time_dim,
+        # transform=data_transform,
+        # target_transform=lambda _: (),
+    )
+
     # sampler_type = SamplerType.INFINITE
     sampler_type = SamplerType.SHARDED_INFINITE
     data_loader = make_data_loader(
@@ -237,7 +232,7 @@ def do_train(cfg, model, resume=False):
         max_iter,
         start_iter,
     ):
-        current_batch_size = data["collated_global_crops"].shape[0] / 2
+        current_batch_size = data["collated_global_crops"].shape[0] / 2  # real batch size
         if iteration > max_iter:
             return
 

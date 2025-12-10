@@ -11,14 +11,14 @@ import torch.nn as nn
 
 class PatchEmbed(nn.Module):
     """
-    EEG to patch embedding: (B, T, C, N) -> (B, C*N, D)
+    EEG to patch embedding: (B, C, N, T) -> (B, C*N, D)
 
     Args:
         in_chans: Input dimension T (time samples per patch). Default: 250.
         embed_dim: Embedding dimension. Default: 768.
         norm_layer: Normalization layer.
         flatten_embedding: If True, flatten the input to (B, C*N, D).
-        num_channels: Number of EEG channels (C). Default: 19.
+        num_channels: Number of EEG channels (C), used for calculating num_patches. Default: 19.
         num_patches_per_channel: Number of patches per channel (N). Default: 30.
     """
 
@@ -39,8 +39,6 @@ class PatchEmbed(nn.Module):
         self.flatten_embedding = flatten_embedding
 
         # Calculate total number of patches (C * N) to maintain consistency with ViT logic
-        self.num_channels = num_channels
-        self.num_patches_per_channel = num_patches_per_channel
         self.num_patches = num_channels * num_patches_per_channel
 
         # Use Linear layer for projection: T -> embed_dim
@@ -51,23 +49,21 @@ class PatchEmbed(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         """
         Args:
-            x: Input tensor of shape (B, T, C, N)
+            x: Input tensor of shape (B, C, N, T)
         """
-        # B=Batch, T=Time(Feature), C=Channels, N=Patches
-        B, T, C, N = x.shape
+        B, C, N, T = x.shape
         
         # Verify input dimension T matches in_chans
         assert T == self.in_chans, f"Input time dimension {T} does not match in_chans {self.in_chans}"
-
-        # Flatten Channels (C) and Patches (N) dimensions: (B, T, C, N) -> (B, T, C*N)
-        x = x.flatten(2, 3)
-
-        # Transpose: (B, T, C*N) -> (B, C*N, T)
-        x = x.transpose(1, 2)
+        assert C * N == self.num_patches, f"Input patches {C*N} do not match expected num_patches {self.num_patches}"
+        
+        # Flatten Channels (C) and Patches (N) dimensions: (B, C, N, T) -> (B, C*N, T)
+        x = x.flatten(1, 2)
 
         # Project to embedding dimension: (B, C*N, T) -> (B, C*N, embed_dim)
         x = self.proj(x)
 
+        # Apply normalization
         x = self.norm(x)
 
         # Reshape back to (B, C, N, embed_dim) if not flattening

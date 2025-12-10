@@ -9,7 +9,6 @@ from torch.utils.data import Sampler
 
 from .datasets.eeg_dataset import EEGDataset
 from .samplers import EpochSampler, InfiniteSampler, ShardedInfiniteSampler
-import dinov2.distributed as distributed
 
 logger = logging.getLogger("dinov2")
 
@@ -35,8 +34,6 @@ def make_dataset(
     logger.info(f'Making EEG dataset from: "{data_root}"')
     
     # 实例化 Dataset
-    # 注意：transform 逻辑已经包含在 EEGDataset 内部 (Global/Local crops 生成)，
-    # 这里不需要额外传递 transform 函数。
     dataset = EEGDataset(
         data_root=data_root,
         num_channels=num_channels,
@@ -46,6 +43,7 @@ def make_dataset(
     )
 
     logger.info(f"# of dataset samples: {len(dataset):,d}")
+
     return dataset
 
 
