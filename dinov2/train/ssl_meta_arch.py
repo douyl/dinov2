@@ -246,6 +246,7 @@ class SSLMetaArch(nn.Module):
 
             return teacher_dino_softmaxed_centered_list, masked_teacher_ibot_softmaxed_centered
 
+        # teacher_dino_softmaxed_centered_list: (n_global_crops=2, B, dim)
         teacher_dino_softmaxed_centered_list, masked_teacher_ibot_softmaxed_centered = get_teacher_output()
         reshard_fsdp_model(self.teacher)
 
@@ -303,6 +304,7 @@ class SSLMetaArch(nn.Module):
         if do_ibot and not self.ibot_separate_head:
             student_global_masked_patch_tokens_after_head = outputs_list.pop(0).squeeze(0)[:n_masked_patches]
 
+        # (1) compute CLS loss for teacher's global crops and student's local crops (2*8 pairs)
         if n_local_crops > 0:
             dino_local_crops_loss = self.dino_loss(
                 student_output_list=student_local_cls_tokens_after_head.chunk(n_local_crops),
@@ -318,13 +320,13 @@ class SSLMetaArch(nn.Module):
         # process global crops
         loss_scales = 2  # this is here since we process global crops together
 
+        # (2) compute CLS loss for teacher's global crops and student's masked global crops (CROSS-LOSS, 2 pairs)
         if do_dino:
-            # compute loss
             dino_global_crops_loss = (
                 self.dino_loss(
                     student_output_list=[student_global_cls_tokens_after_head],
                     teacher_out_softmaxed_centered_list=[
-                        teacher_dino_softmaxed_centered_list.flatten(0, 1)
+                        teacher_dino_softmaxed_centered_list.flatten(0, 1)   # (n_global_crops=2, B, dim) but reverse
                     ],  # these were chunked and stacked in reverse so A is matched to B
                 )
                 * loss_scales
@@ -347,8 +349,8 @@ class SSLMetaArch(nn.Module):
                     koleo_loss / loss_scales
                 )  # this is to display the same losses as before but we can remove eventually
 
+        # (3) compute Patch loss for teacher's global crops and student's masked global crops
         if do_ibot:
-            # compute loss
             ibot_patch_loss = (
                 self.ibot_patch_loss.forward_masked(
                     student_global_masked_patch_tokens_after_head,

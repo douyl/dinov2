@@ -2,8 +2,13 @@ MODEL:
   WEIGHTS: ''
 ibot:
   separate_head: true
+  mask_sample_probability: 0.5
+  mask_ratio_min_max:
+  - 0.1
+  - 0.5
+  mask_min_aspect: 0.15
 train:
-  batch_size_per_gpu: 2
+  batch_size_per_gpu: 3
   # dataset_path: ImageNet:split=TRAIN
   centering: sinkhorn_knopp
 dataset:

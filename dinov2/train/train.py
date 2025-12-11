@@ -173,6 +173,7 @@ def do_train(cfg, model, resume=False):
         num_channels=num_channels,
         num_time_patches=num_patches_per_channel,
         max_num_patches=0.5 * num_channels * num_patches_per_channel,
+        min_aspect=cfg.ibot.mask_min_aspect,
     )
 
     # 先不做transform，还没想好EEG上怎么做!!!!!!!!!!!!!!

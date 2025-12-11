@@ -27,7 +27,24 @@ def collate_data_and_cast(samples_list, mask_ratio_tuple, mask_probability, dtyp
     local_time_idxs = torch.stack([s["local_indices"][i]["time"] for i in range(n_local_crops) for s in samples_list])
 
     # 3. Masking Logic (Standard DINOv2 logic)
-    B = len(collated_global_crops)
+    """
+        [Batch 级掩码调度逻辑：具体实例解析]
+        这里决定了 Batch 内每张图具体遮挡多少比例。逻辑如下：
+        1. 【确定数量】: 
+        假设 B=6 (Total Crops), mask_prob=0.5。
+        这意味着：有 3 张图需要遮挡 (Samples Masked)，剩下 3 张图完全不遮挡。
+        2. 【制造难度阶梯】: 
+        代码不希望大家难度一样，而是用 linspace 把 [0.1, 0.5] 的比例范围切分成 3 段：
+        - 第 1 张图 (简单): 在 [0.10, 0.23] 之间随机选一个比例 (例如遮 80 个 Token)。
+        - 第 2 张图 (中等): 在 [0.23, 0.36] 之间随机选一个比例 (例如遮 160 个 Token)。
+        - 第 3 张图 (困难): 在 [0.36, 0.50] 之间随机选一个比例 (例如遮 240 个 Token)。
+        3. 【混合与打乱】:
+        - 生成完上述 3 个不同难度的 Mask 后，对其余 3 个样本生成全 0 Mask (不遮挡)。
+        - 使用 shuffle 打乱列表顺序，防止模型根据 Batch 中的位置猜出难度。
+        4. 【形状变换】:
+        最后将 List 堆叠并 flatten(1)，把 (B, 19, 30) 压扁成 (B, 570) 喂给 Transformer。
+    """
+    B = len(collated_global_crops)  # actually B * n_global_crops
     N = n_tokens
     n_samples_masked = int(B * mask_probability)
     probs = torch.linspace(*mask_ratio_tuple, n_samples_masked + 1)

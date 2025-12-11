@@ -58,8 +58,9 @@ ibot:
   head_bottleneck_dim: 256
   head_nlayers: 3
   head_hidden_dim: 2048
+  mask_min_aspect: 0.15
 train:
-  batch_size_per_gpu: 2
+  batch_size_per_gpu: 3
   output_dir: /media/douyl/Disk4T/douyl/IDEA_Lab/Project_BCI/dinov2/debug_output_eeg
   saveckp_freq: 20
   seed: 0
@@ -93,7 +94,7 @@ optim:
   weight_decay: 0.04
   weight_decay_end: 0.2
   base_lr: 0.0004
-  lr: 1.767766952966369e-05
+  lr: 2.1650635094610966e-05
   warmup_epochs: 60
   min_lr: 1.0e-06
   clip_grad: 3.0
