@@ -19,26 +19,17 @@ class SamplerType(Enum):
     SHARDED_INFINITE = 3
     SHARDED_INFINITE_NEW = 4
 
+
 def make_dataset(
     *,
     data_root: str,
-    num_channels: int = 19,
-    num_patches_per_channel: int = 30,
-    patch_time_dim: int = 250,
-    local_crops_number: int = 8,
-    local_crop_size_channels: int = 10,
-    local_crop_size_patches: int = 15,
+    data_transform
 ):
     logger.info(f'Making EEG dataset from: "{data_root}"')
     
     dataset = EEGDataset(
         data_root=data_root,
-        num_channels=num_channels,
-        num_patches_per_channel=num_patches_per_channel,
-        patch_time_dim=patch_time_dim,
-        local_crops_number=local_crops_number,
-        local_crop_size_channels=local_crop_size_channels,
-        local_crop_size_patches=local_crop_size_patches,
+        transform=data_transform
     )
 
     logger.info(f"# of dataset samples: {len(dataset):,d}")

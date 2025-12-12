@@ -13,9 +13,9 @@ from functools import partial
 from fvcore.common.checkpoint import PeriodicCheckpointer
 import torch
 
-# 修改 1: 引入你的 EEGDataset
-# 假设 eeg_dataset.py 在 dinov2/data/datasets/ 下
-from dinov2.data.datasets.eeg_dataset import EEGDataset
+
+# from dinov2.data.datasets.eeg_dataset import EEGDataset
+from dinov2.data.augmentations import DataAugmentationDINO
 from dinov2.data.masking import MaskingGenerator
 from dinov2.data.collate import collate_data_and_cast
 from dinov2.data.loaders import SamplerType, make_dataset, make_data_loader
@@ -165,25 +165,48 @@ def do_train(cfg, model, resume=False):
         max_to_keep=3,
     )
 
-    # setup data preprocessing
+    # setup dataset and preprocessing
     num_channels = cfg.dataset.num_channels
     num_patches_per_channel = cfg.dataset.num_patches_per_channel
     n_tokens = num_channels * num_patches_per_channel
+
+    data_transform = DataAugmentationDINO(
+        global_crop_size_channels=cfg.dataset.num_channels,
+        global_crop_size_patches=cfg.dataset.num_patches_per_channel,
+        patch_time_dim=cfg.dataset.patch_time_dim,
+        local_crops_number=cfg.crops.local_crops_number,
+        local_crop_size_channels=cfg.crops.local_crop_size_channels,
+        local_crop_size_patches=cfg.crops.local_crop_size_patches,
+        # Augmentation Probabilities
+        global_aug_probs=cfg.augmentation.global_aug_probs,
+        local_aug_prob=cfg.augmentation.local_aug_prob,
+        scale_prob=cfg.augmentation.scale_prob,       # Amplitude Scale
+        scale_sigma=cfg.augmentation.scale_sigma,     # Amplitude Scale
+        noise_prob=cfg.augmentation.noise_prob,           # Gaussian Noise
+        noise_std_range=cfg.augmentation.noise_std_range, # Gaussian Noise
+        dropout_ch_prob=cfg.augmentation.dropout_ch_prob,              
+        dropout_max_channels=cfg.augmentation.dropout_max_channels,
+        dropout_as_noise_prob=cfg.augmentation.dropout_as_noise_prob,
+        
+        time_shift_prob=cfg.augmentation.time_shift_prob,
+        max_time_shift_ratio=cfg.augmentation.max_time_shift_ratio,
+        
+        phase_perturb_prob=cfg.augmentation.phase_perturb_prob,
+        phase_perturb_rad=cfg.augmentation.phase_perturb_rad,
+    )
+
+    dataset = make_dataset(
+        data_root=cfg.dataset.data_root,
+        data_transform=data_transform
+    )
+
+    # setup data loader
     mask_generator = MaskingGenerator(
         num_channels=num_channels,
         num_time_patches=num_patches_per_channel,
         max_num_patches=0.5 * num_channels * num_patches_per_channel,
         min_aspect=cfg.ibot.mask_min_aspect,
     )
-
-    # 先不做transform，还没想好EEG上怎么做!!!!!!!!!!!!!!
-    # data_transform = DataAugmentationDINO(
-    #     cfg.crops.global_crops_scale,
-    #     cfg.crops.local_crops_scale,
-    #     cfg.crops.local_crops_number,
-    #     global_crops_size=cfg.crops.global_crops_size,
-    #     local_crops_size=cfg.crops.local_crops_size,
-    # )
 
     collate_fn = partial(
         collate_data_and_cast,
@@ -192,17 +215,6 @@ def do_train(cfg, model, resume=False):
         n_tokens=n_tokens,
         mask_generator=mask_generator,
         dtype=inputs_dtype,
-    )
-
-    # setup data loader
-    dataset = make_dataset(
-        data_root=cfg.dataset.data_root,
-        num_channels=num_channels,
-        num_patches_per_channel=num_patches_per_channel,
-        patch_time_dim=cfg.dataset.patch_time_dim,
-        local_crops_number=cfg.crops.local_crops_number,
-        local_crop_size_channels=cfg.crops.local_crop_size_channels,
-        local_crop_size_patches=cfg.crops.local_crop_size_patches,
     )
 
     # sampler_type = SamplerType.INFINITE

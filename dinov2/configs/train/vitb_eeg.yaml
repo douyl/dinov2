@@ -16,7 +16,25 @@ dataset:
   num_channels: 19
   num_patches_per_channel: 30
   patch_time_dim: 250  # sampling rate 250Hz -> 1s patches
-  # local_crop_channels: 10
+crops:
+  # local_crops_number: 8
+  local_crop_size_channels: 10
+  local_crop_size_patches: 15
+augmentation:
+  global_aug_probs: [1.0, 0.1] # Global crop-1 100% augmentation, Global crop-2 10% augmentation
+  local_aug_prob: 0.5          # Local crops 50% augmentation
+  scale_prob: 0.3              # Amplitude Scale
+  scale_sigma: 0.2             # Amplitude Scale
+  noise_prob: 0.3              # Gaussian Noise
+  noise_std_range: [0.05, 0.1] # Gaussian Noise
+  dropout_ch_prob: 0.1         # Channel Dropout
+  dropout_max_channels: 3      # Channel Dropout
+  dropout_as_noise_prob: 0.5   # Channel Dropout
+  time_shift_prob: 0.3         # Time Shift
+  max_time_shift_ratio: 0.05   # Time Shift
+  phase_perturb_prob: 0.3      # Phase Perturbation
+  phase_perturb_rad: 0.2       # Phase Perturbation
+
 student:
   arch: vit_base
   pretrained_weights: ''
@@ -35,10 +53,6 @@ optim:
   base_lr: 4.0e-04  # learning rate for a batch size of 1024
   warmup_epochs: 60
   layerwise_decay: 1.0
-crops:
-  # global_crops_size: 518
-  # local_crops_size: 224
-  local_crop_size_channels: 10
-  local_crop_size_patches: 15
+
 evaluation:
   eval_period_iterations: 1000

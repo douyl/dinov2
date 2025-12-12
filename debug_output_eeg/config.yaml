@@ -121,3 +121,21 @@ dataset:
   num_channels: 19
   num_patches_per_channel: 30
   patch_time_dim: 250
+augmentation:
+  global_aug_probs:
+  - 1.0
+  - 0.1
+  local_aug_prob: 0.5
+  scale_prob: 0.3
+  scale_sigma: 0.2
+  noise_prob: 0.3
+  noise_std_range:
+  - 0.05
+  - 0.1
+  dropout_ch_prob: 0.1
+  dropout_max_channels: 3
+  dropout_as_noise_prob: 0.5
+  time_shift_prob: 0.3
+  max_time_shift_ratio: 0.05
+  phase_perturb_prob: 0.3
+  phase_perturb_rad: 0.2
