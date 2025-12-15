@@ -33,9 +33,10 @@ logger = logging.getLogger("dinov2")
 
 def get_args_parser(add_help: bool = True):
     parser = argparse.ArgumentParser("DINOv2 training", add_help=add_help)
-    parser.add_argument("--config-file", default="dinov2/configs/train/vitb_eeg.yaml", metavar="FILE", help="path to config file")
+    parser.add_argument("--config-file", default="/public_bme2/grpdgshen/douyl/Code/EEGdinov2/dinov2/configs/train/vitb_eeg.yaml", metavar="FILE", help="path to config file")
     parser.add_argument(
         "--no-resume",
+        "--no_resume",
         action="store_true",
         help="Whether to not attempt to resume from the checkpoint directory. ",
     )

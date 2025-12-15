@@ -61,7 +61,24 @@ class DataAugmentationDINO(object):
         self.phase_perturb_prob = phase_perturb_prob
         self.phase_perturb_rad = phase_perturb_rad
 
-        logger.info(f"EEG Augmentations Initialized. Global Probs: {global_aug_probs}, Local Prob: {local_aug_prob}")
+        # logger.info(f"EEG Augmentations Initialized. Global Probs: {global_aug_probs}, Local Prob: {local_aug_prob}")
+        logger.info(
+            f"   EEG Data Augmentation Configuration\n"
+            f" [Dimensions]\n"
+            f"  - Global Crop: C={self.C}, N={self.N}, T_patch={self.T} (Total={self.total_time})\n"
+            f"  - Local Crops: {self.n_local_crops} x (C={self.local_C}, N={self.local_N})\n"
+            f"\n"
+            f" [Probabilities]\n"
+            f"  - Global Views Aug Probs: {self.global_aug_probs}\n"
+            f"  - Local Views Aug Prob:   {self.local_aug_prob}\n"
+            f"\n"
+            f" [Details]\n"
+            f"  - Amplitude Scale:     Prob={self.scale_prob}, Sigma={self.scale_sigma}\n"
+            f"  - Gaussian Noise:      Prob={self.noise_prob}, Range={self.noise_std_range}\n"
+            f"  - Channel Dropout:     Prob={self.dropout_ch_prob}, MaxCh={self.dropout_max_channels}, ToNoise={self.dropout_as_noise_prob}\n"
+            f"  - Time Shift:          Prob={self.time_shift_prob}, MaxRatio={max_time_shift_ratio}, Max={self.max_time_shift}\n"
+            f"  - Phase Perturbation:  Prob={self.phase_perturb_prob}, Rad={self.phase_perturb_rad}\n"
+        )
 
     def _apply_physics_augmentations(self, x_flat):
         """

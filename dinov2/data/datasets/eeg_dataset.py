@@ -9,43 +9,59 @@ class EEGDataset(Dataset):
     def __init__(self, data_root, transform=None):
         super().__init__()
         self.data_root = data_root
-        self.transform = transform  # DataAugmentationEEG instance or None
+        self.transform = transform
+        self.file_paths = []
+
+        print(f"Scanning files in {data_root}... This might take a minute.")
         
-        self.files = []
-        if os.path.exists(data_root):
-             self.files = [os.path.join(data_root, f) for f in os.listdir(data_root) if f.endswith('.npy')]
-        if len(self.files) == 0:
-            print(f"Warning: No .npy files found in {data_root}")
+        # Walk through the directory tree to find all .npy files
+        # Structure: data_root/000/record_folder/segment_x.npy
+        for root, _, files in os.walk(data_root):
+            for file in files:
+                if file.endswith('.npy'):
+                    self.file_paths.append(os.path.join(root, file))
+
+        print(f"Dataset loaded: Found {len(self.file_paths)} files.")
 
     def __len__(self):
-        return len(self.files)
+        return len(self.file_paths)
 
     def _normalize_per_channel(self, x):
-        # x shape: (C, N, T)
-        # Calculate mean/std along (N, T) dimensions
+        """
+        Normalize each channel independently.
+        Input x shape: (C, N, T) -> (19, 30, 250)
+        """
+        # Calculate mean/std along (N, T) dimensions (axis 1 and 2)
         mean = x.mean(axis=(1, 2), keepdims=True)
         std = x.std(axis=(1, 2), keepdims=True)
+        
+        # Avoid division by zero
         return np.divide(x - mean, std, out=np.zeros_like(x), where=std > 1e-8)
 
     def __getitem__(self, index):
-        path = self.files[index]
+        path = self.file_paths[index]
         
         # 1. Load Data
-        # Raw: (C, N, T) -> (19, 30, 250)
-        data_np = np.load(path)
+        try:
+            # Load the individual segment file
+            # Shape: (C, N, T) -> (19, 30, 250)
+            data_np = np.load(path)
+        except Exception as e:
+            print(f"Error loading {path}: {e}")
+            # Fallback: return zeros to prevent crashing
+            data_np = np.zeros((19, 30, 250), dtype=np.float32)
 
         # 2. Per-Channel Normalization
         data = self._normalize_per_channel(data_np)
         data = torch.from_numpy(data).float()
          
         # 3. Permute for model input
+        # Current: (C, N, T)
         # Target: (T, C, N) -> (250, 19, 30)
         data = data.permute(2, 0, 1) 
 
-        # 4. Apply Augmentation (Crops + Noise etc.)
+        # 4. Apply Augmentation (e.g., masking, cropping)
         if self.transform is not None:
-            # transform 返回一个 dict，包含 global_crops, local_crops, indices 等
             return self.transform(data)
         else:
-            # Fallback output (should generally not happen in training)
             return {"data": data}

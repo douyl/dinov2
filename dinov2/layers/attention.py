@@ -22,9 +22,8 @@ XFORMERS_ENABLED = os.environ.get("XFORMERS_DISABLED") is None
 try:
     if XFORMERS_ENABLED:
         from xformers.ops import memory_efficient_attention, unbind
-
         XFORMERS_AVAILABLE = True
-        warnings.warn("xFormers is available (Attention)")
+        # warnings.warn("xFormers is available (Attention)")
     else:
         warnings.warn("xFormers is disabled (Attention)")
         raise ImportError
@@ -55,7 +54,8 @@ class Attention(nn.Module):
         self.proj_drop = nn.Dropout(proj_drop)
 
     def init_weights(
-        self, init_attn_std: float | None = None, init_proj_std: float | None = None, factor: float = 1.0
+        # self, init_attn_std: float | None = None, init_proj_std: float | None = None, factor: float = 1.0
+        self, init_attn_std = None, init_proj_std = None, factor: float = 1.0
     ) -> None:
         init_attn_std = init_attn_std or (self.dim**-0.5)
         init_proj_std = init_proj_std or init_attn_std * factor

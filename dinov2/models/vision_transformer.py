@@ -146,7 +146,6 @@ class DinoVisionTransformer(nn.Module):
             ffn_layer = SwiGLUFFNFused
         elif ffn_layer == "identity":
             logger.info("using Identity layer as FFN")
-
             def f(*args, **kwargs):
                 return nn.Identity()
 

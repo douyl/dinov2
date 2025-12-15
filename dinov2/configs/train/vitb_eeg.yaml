@@ -8,16 +8,16 @@ ibot:
   - 0.5
   mask_min_aspect: 0.15
 train:
-  batch_size_per_gpu: 3
-  # dataset_path: ImageNet:split=TRAIN
+  batch_size_per_gpu: 96  # bs=1024 is base_lr=4.0e-04
+  num_workers: 5
   centering: sinkhorn_knopp
 dataset:
-  data_root: ./samples
+  # data_root: ./samples  # test
+  data_root: /public_bme2/grpdgshen/douyl/EEG_Dataset/TUEG/TUEG_250Hz/Segment
   num_channels: 19
   num_patches_per_channel: 30
   patch_time_dim: 250  # sampling rate 250Hz -> 1s patches
 crops:
-  # local_crops_number: 8
   local_crop_size_channels: 10
   local_crop_size_patches: 15
 augmentation:
@@ -34,15 +34,12 @@ augmentation:
   max_time_shift_ratio: 0.05   # Time Shift
   phase_perturb_prob: 0.3      # Phase Perturbation
   phase_perturb_rad: 0.2       # Phase Perturbation
-
 student:
   arch: vit_base
   pretrained_weights: ''
-  # patch_size: 14
-  # patch_time_dim: 250  # sampling rate 250Hz -> 1s patches
   drop_path_rate: 0.4
   num_register_tokens: 4
-  ffn_layer: mlp # it is used in checkpoint from torch hub
+  ffn_layer: mlp
   block_chunks: 0
 teacher:
   momentum_teacher: 0.994
@@ -53,6 +50,5 @@ optim:
   base_lr: 4.0e-04  # learning rate for a batch size of 1024
   warmup_epochs: 60
   layerwise_decay: 1.0
-
 evaluation:
   eval_period_iterations: 1000
