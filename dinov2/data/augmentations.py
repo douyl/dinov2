@@ -31,7 +31,7 @@ class DataAugmentationDINO(object):
         dropout_max_channels=3,     
         dropout_as_noise_prob=0.5,  # [NEW] Probability to replace channel with noise instead of zeros
         time_shift_prob=0.3,     
-        max_time_shift_ratio=0.05, 
+        max_time_shift_ratio=0.01, 
         phase_perturb_prob=0.2,  
         phase_perturb_rad=0.2,
     ):
@@ -109,7 +109,8 @@ class DataAugmentationDINO(object):
         # 3. Amplitude Scale (Per Channel Independent)
         if self.scale_prob > 0 and random.random() < self.scale_prob:
             # shape: (C, 1)
-            scales = torch.exp(torch.randn(C, 1, device=device) * self.scale_sigma)
+            # scales = torch.exp(torch.randn(C, 1, device=device) * self.scale_sigma) # Per Channel
+            scales = torch.exp(torch.randn(1, 1, device=device) * self.scale_sigma)  # All channels
             x_flat = x_flat * scales
 
         # 4. Gaussian Noise (Per Channel Independent STD)

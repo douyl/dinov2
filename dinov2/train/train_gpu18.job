@@ -4,7 +4,7 @@
 #SBATCH --ntasks=1
 #SBATCH -c 12
 #SBATCH -t 120:00:00
-#SBATCH -p bme_gpu
+#SBATCH -p bme_gpu18
 #SBATCH --gres=gpu:NVIDIAA10080GBPCIe:2
 #SBATCH -o /public_bme2/grpdgshen/douyl/Code/EEGdinov2/dinov2/experiments/joblog/train_%j.out
 #SBATCH -e /public_bme2/grpdgshen/douyl/Code/EEGdinov2/dinov2/experiments/joblog/train_%j.out
@@ -24,7 +24,12 @@ cd /public_bme2/grpdgshen/douyl/Code/EEGdinov2
 
 # env -u SLURM_JOB_ID torchrun --nproc_per_node=2 dinov2/train/train.py --output_dir dinov2/experiments/v5_SharedHead --config-file dinov2/configs/train/vitb_eeg_v5_SharedHead.yaml
 # env -u SLURM_JOB_ID torchrun --nproc_per_node=2 --master_port=29501 dinov2/train/train.py --output_dir dinov2/experiments/v6_SharedHead8192 --config-file dinov2/configs/train/vitb_eeg_v6_SharedHead8192.yaml
-env -u SLURM_JOB_ID torchrun --nproc_per_node=2  dinov2/train/train.py --output_dir dinov2/experiments/v7_SharedHead_10x15 --config-file dinov2/configs/train/vitb_eeg_v7_SharedHead_10x15.yaml
+# torchrun --nproc_per_node=2  dinov2/train/train.py --output_dir dinov2/experiments/v7_SharedHead_10x15 --config-file dinov2/configs/train/vitb_eeg_v7_SharedHead_10x15.yaml
+
+# env -u SLURM_JOB_ID torchrun --nproc_per_node=2 --master_port=29503 dinov2/train/train.py --output_dir dinov2/experiments/v8_SharedHead8192_MaskRatio3 --config-file dinov2/configs/train/vitb_eeg_v8_SharedHead8192_MaskRatio3.yaml
+# env -u SLURM_JOB_ID torchrun --nproc_per_node=2 --master_port=29504 dinov2/train/train.py --output_dir dinov2/experiments/v9_SharedHead8192_IbotWeight --config-file dinov2/configs/train/vitb_eeg_v9_SharedHead8192_IbotWeight.yaml
+# env -u SLURM_JOB_ID torchrun --nproc_per_node=2 --master_port=29504 dinov2/train/train.py --output_dir dinov2/experiments/v10_SharedHead8192_IbotWeight_10x15 --config-file dinov2/configs/train/vitb_eeg_v10_SharedHead8192_IbotWeight_10x15.yaml
+env -u SLURM_JOB_ID torchrun --nproc_per_node=2 --master_port=29505 dinov2/train/train.py --output_dir dinov2/experiments/v11_SeperateHead8192_IbotWeight --config-file dinov2/configs/train/vitb_eeg_v11_SeperateHead8192_IbotWeight.yaml
 
 
 

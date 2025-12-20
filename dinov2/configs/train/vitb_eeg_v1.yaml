@@ -31,7 +31,7 @@ augmentation:
   dropout_max_channels: 3      # Channel Dropout
   dropout_as_noise_prob: 0.5   # Channel Dropout
   time_shift_prob: 0.3         # Time Shift
-  max_time_shift_ratio: 0.05   # Time Shift
+  max_time_shift_ratio: 0.01   # Time Shift
   phase_perturb_prob: 0.3      # Phase Perturbation
   phase_perturb_rad: 0.2       # Phase Perturbation
 student:

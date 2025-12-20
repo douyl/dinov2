@@ -42,14 +42,14 @@ class EEGDataset(Dataset):
         path = self.file_paths[index]
         
         # 1. Load Data
-        try:
-            # Load the individual segment file
-            # Shape: (C, N, T) -> (19, 30, 250)
-            data_np = np.load(path)
-        except Exception as e:
-            print(f"Error loading {path}: {e}")
-            # Fallback: return zeros to prevent crashing
-            data_np = np.zeros((19, 30, 250), dtype=np.float32)
+        # try:
+        # Load the individual segment file
+        # Shape: (C, N, T) -> (19, 30, 250)
+        data_np = np.load(path)
+        # except Exception as e:
+        #     print(f"Error loading {path}: {e}")
+        #     # Fallback: return zeros to prevent crashing
+        #     data_np = np.zeros((19, 30, 250), dtype=np.float32)
 
         # 2. Per-Channel Normalization
         data = self._normalize_per_channel(data_np)

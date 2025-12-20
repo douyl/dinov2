@@ -1,0 +1,29 @@
+#!/bin/bash
+#SBATCH -J EEGdinov2
+#SBATCH -N 1
+#SBATCH --ntasks=1
+#SBATCH -c 24
+#SBATCH -t 120:00:00
+#SBATCH -p bme_gpu17
+#SBATCH --gres=gpu:NVIDIAA10080GBPCIe:4
+#SBATCH -o /public_bme2/grpdgshen/douyl/Code/EEGdinov2/dinov2/experiments/joblog/train_%j.out
+#SBATCH -e /public_bme2/grpdgshen/douyl/Code/EEGdinov2/dinov2/experiments/joblog/train_%j.out
+
+
+echo ${SLURM_JOB_NODELIST}
+echo start on $(date)
+
+cd /public_bme2/grpdgshen/douyl/Code/EEGdinov2
+source /home_data/home/douyl/anaconda3/bin/activate /home_data/home/douyl/anaconda3/envs/dinov2
+
+# env -u SLURM_JOB_ID torchrun --nproc_per_node=4 /public_bme2/grpdgshen/douyl/Code/EEGdinov2/dinov2/train/train.py --output_dir /public_bme2/grpdgshen/douyl/Code/EEGdinov2/dinov2/experiments/v1 --config-file /public_bme2/grpdgshen/douyl/Code/EEGdinov2/dinov2/configs/train/vitb_eeg.yaml
+env -u SLURM_JOB_ID torchrun --nproc_per_node=4 /public_bme2/grpdgshen/douyl/Code/EEGdinov2/dinov2/train/train.py --output_dir /public_bme2/grpdgshen/douyl/Code/EEGdinov2/dinov2/experiments/v2_noAugWarm30 --config-file /public_bme2/grpdgshen/douyl/Code/EEGdinov2/dinov2/configs/train/vitb_eeg.yaml
+
+
+#SBATCH -p bme_gpu
+#SBATCH -p bme_a10080g
+#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:NVIDIAA100-PCIE-40GB:1
+#SBATCH --gres=gpu:NVIDIAA10080GBPCIe:1
+echo end on $(date)
+
